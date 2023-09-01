@@ -1,5 +1,6 @@
 using DAL.Tools;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 
 namespace APIusuario.Controllers
 {
@@ -13,18 +14,19 @@ namespace APIusuario.Controllers
     };
 
         private readonly ILogger<WeatherForecastController> _logger;
-        private readonly IFactory _factory;
+        private readonly IConfiguration _configuration;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger, IFactory factory)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger, IConfiguration configuration)
         {
             _logger = logger;
-            _factory = factory;
+            _configuration = configuration;
         }
+
+        var db = _configuration.GetConnectionString
 
         [HttpGet(Name = "GetWeatherForecast")]
         public IEnumerable<WeatherForecast> Get()
         {
-            _factory.Prueba();
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = DateTime.Now.AddDays(index),

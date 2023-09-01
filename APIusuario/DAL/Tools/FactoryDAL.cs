@@ -10,6 +10,7 @@ namespace DAL.Tools
 
     public sealed class FactoryDAL : IFactory
     {
+        /*
         #region singleton
         private readonly static FactoryDAL _instance = new FactoryDAL();
 
@@ -26,13 +27,14 @@ namespace DAL.Tools
             //Implent here the initialization of your singleton
         }
         #endregion
-
+        */
         
         private readonly IConfiguration configuration;
 
-        private FactoryDAL(IConfiguration _configuration)
+        public FactoryDAL()
         {
-            this.configuration = _configuration;
+            
+            var conn2 = 0;
         }
 
         public void Prueba()

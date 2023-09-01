@@ -1,13 +1,13 @@
 using Auth0.AspNetCore.Authentication;
+using System.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Configuration.AddJsonFile("appsettings.json",
+        optional: true,
+        reloadOnChange: true);
 
-builder.Services.AddAuth0WebAppAuthentication(options =>
-{
-    options.Domain = builder.Configuration["dev-ffhtfaal8oyklq6l.us.auth0.com"];
-    options.ClientId = builder.Configuration["StQoCwCjogk9IdFv2h4LjNjliogRyosT"];
-});
 builder.Services.AddControllersWithViews();
 
 // Add services to the container.
@@ -26,10 +26,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
-
-app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseHttpsRedirection();
 
 app.MapControllers();
 

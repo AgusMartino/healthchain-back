@@ -69,6 +69,21 @@ namespace APIusuario.Controllers
             }
         }
 
+        [HttpPut(Name = "UpdateRolUser")]
+        public async Task<ActionResult> UpdateRolUser(Usuario usuario)
+        {
+            try
+            {
+                bool user = UserService.Current.LoginUserBO(usuario);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return NotFound();
+                throw ex;
+            }
+        }
+
 
     }
 }

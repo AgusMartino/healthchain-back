@@ -48,19 +48,6 @@ namespace DAL.Manager
             
         }
 
-        public Usuario GetUserByUserAndPassword(string user, string password)
-        {
-            try
-            {
-                return null;
-            }
-            catch (Exception ex)
-            {
-
-                throw ex;
-            }
-        }
-
         public bool LoginUserBo(string user, string password)
         {
             try

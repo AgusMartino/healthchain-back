@@ -8,7 +8,7 @@ namespace DAL.Tools
     internal static class SqlHelper
     {
         readonly static string conString;
-
+        /*
         static SqlHelper()
         {
             conString = ConfigurationManager.ConnectionStrings["SLConString"].ConnectionString;
@@ -71,5 +71,6 @@ namespace DAL.Tools
                 return reader;
             }
         }
+        */
     }
 }

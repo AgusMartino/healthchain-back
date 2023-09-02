@@ -1,0 +1,12 @@
+R:\Agus\Facultad\TFI 5to\healthchain-back\ApiABMs\Domain\bin\Debug\net6.0\Domain.deps.json
+R:\Agus\Facultad\TFI 5to\healthchain-back\ApiABMs\Domain\bin\Debug\net6.0\Domain.dll
+R:\Agus\Facultad\TFI 5to\healthchain-back\ApiABMs\Domain\bin\Debug\net6.0\Domain.pdb
+R:\Agus\Facultad\TFI 5to\healthchain-back\ApiABMs\Domain\obj\Debug\net6.0\Domain.csproj.AssemblyReference.cache
+R:\Agus\Facultad\TFI 5to\healthchain-back\ApiABMs\Domain\obj\Debug\net6.0\Domain.GeneratedMSBuildEditorConfig.editorconfig
+R:\Agus\Facultad\TFI 5to\healthchain-back\ApiABMs\Domain\obj\Debug\net6.0\Domain.AssemblyInfoInputs.cache
+R:\Agus\Facultad\TFI 5to\healthchain-back\ApiABMs\Domain\obj\Debug\net6.0\Domain.AssemblyInfo.cs
+R:\Agus\Facultad\TFI 5to\healthchain-back\ApiABMs\Domain\obj\Debug\net6.0\Domain.csproj.CoreCompileInputs.cache
+R:\Agus\Facultad\TFI 5to\healthchain-back\ApiABMs\Domain\obj\Debug\net6.0\Domain.dll
+R:\Agus\Facultad\TFI 5to\healthchain-back\ApiABMs\Domain\obj\Debug\net6.0\refint\Domain.dll
+R:\Agus\Facultad\TFI 5to\healthchain-back\ApiABMs\Domain\obj\Debug\net6.0\Domain.pdb
+R:\Agus\Facultad\TFI 5to\healthchain-back\ApiABMs\Domain\obj\Debug\net6.0\ref\Domain.dll

@@ -30,15 +30,17 @@ namespace DAL.Manager.Adapter
         public Usuario adapt(object[] values)
         {
             string[] criterios = { "id" };
-            string[] valores = { values[(int)Columns.usuario].ToString() };
+            string[] valores = { values[(int)Columns.tipo_usuario].ToString() };
             Usuario usuario = new Usuario
             {
-                Id = Guid.Parse(values[(int)Columns.id_usuario].ToString()),
+                Id = values[(int)Columns.id_usuario].ToString(),
                 user = values[(int)Columns.usuario].ToString(),
                 password = values[(int)Columns.contraseña].ToString(),
                 name = values[(int)Columns.nombre].ToString(),
                 lastname = values[(int)Columns.apellido].ToString(),
                 rol = RolManager.Current.GetOne(criterios , valores ),
+                fecha_creacion = DateTime.Parse(values[(int)Columns.fecha_creacion].ToString()),
+                fecha_modificacion = DateTime.Parse(values[(int)Columns.fecha_modificacion].ToString())
             };
             return usuario;
         }
@@ -50,7 +52,10 @@ namespace DAL.Manager.Adapter
             contraseña,
             nombre,
             apellido,
-            tipo_usuario
+            cuit_empresa,
+            tipo_usuario,
+            fecha_creacion,
+            fecha_modificacion
         }
     }
 

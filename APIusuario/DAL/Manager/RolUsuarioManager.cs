@@ -35,8 +35,8 @@ namespace DAL.Manager
             {
                 SqlHelper.ExecuteNonQuery(statement, System.Data.CommandType.Text, new SqlParameter[]
                 {
-                    new SqlParameter("@IdUsuario", obj2.Id),
-                    new SqlParameter("@IdPerfil", obj1.Id)
+                    new SqlParameter("@IdUsuario", Guid.Parse(obj1.Id)),
+                    new SqlParameter("@IdRol", Convert.ToInt32(obj2.Id))
                 });
             }
             catch (Exception ex)
@@ -44,7 +44,6 @@ namespace DAL.Manager
 
                 throw ex;
             }
-            throw new NotImplementedException();
         }
 
         public void delete(Usuario obj1, Rol obj2)
@@ -52,15 +51,13 @@ namespace DAL.Manager
             string statement = "DELETE FROM [dbo].[usuario_rol] WHERE IdUsuario = @IdUsuario";
             try
             {
-                SqlHelper.ExecuteNonQuery(statement, System.Data.CommandType.Text, new SqlParameter("@IdUsuario", obj1.Id));
+                SqlHelper.ExecuteNonQuery(statement, System.Data.CommandType.Text, new SqlParameter("@IdUsuario", Guid.Parse(obj1.Id)));
             }
             catch (Exception ex)
             {
 
                 throw ex;
             }
-            
-            throw new NotImplementedException();
         }
 
         public Rol GetOne(Guid obj)

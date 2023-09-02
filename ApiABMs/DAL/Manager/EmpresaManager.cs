@@ -33,12 +33,12 @@ namespace DAL.Manager
         #region Statements
         private string InsertStatement
         {
-            get => "INSERT INTO [dbo].[Empresa] (id_empresa, cuit_empresa, nombre_empresa, direccion_empresa) VALUES (@id_empresa, @cuit_empresa, @nombre_empresa, @direccion_empresa)";
+            get => "INSERT INTO [dbo].[Empresa] (id_empresa, cuit_empresa, nombre_empresa, direccion_empresa, fecha_creacion, fecha_modificacion) VALUES (@id_empresa, @cuit_empresa, @nombre_empresa, @direccion_empresa, @fecha_creacion, @fecha_modificacion)";
         }
 
         private string UpdateStatement
         {
-            get => "UPDATE [dbo].[Empresa] SET nombre_empresa = @nombre_empresa, direccion_empresa = @direccion_empresa WHERE id_empresa = @id_empresa";
+            get => "UPDATE [dbo].[Empresa] SET nombre_empresa = @nombre_empresa, direccion_empresa = @direccion_empresa, fecha_modificacion = @fecha_modificacion WHERE id_empresa = @id_empresa";
         }
 
         private string DeleteStatement
@@ -64,7 +64,7 @@ namespace DAL.Manager
                 using (var dr = SqlHelper.ExecuteReader(SelectOneStatement, System.Data.CommandType.Text,
                     new SqlParameter[]
                     {
-                        new SqlParameter("@cuit_empresa", int.Parse(valores.First()))
+                        new SqlParameter("@cuit_empresa", Convert.ToInt32(valores.First()))
                     }))
                 {
                     if (dr.Read())
@@ -94,10 +94,12 @@ namespace DAL.Manager
             {
                 SqlHelper.ExecuteNonQuery(InsertStatement, System.Data.CommandType.Text, new SqlParameter[]
                 {
-                    new SqlParameter("@id_empresa", entity.id),
-                    new SqlParameter("@cuit_empresa", entity.cuit),
+                    new SqlParameter("@id_empresa", Guid.Parse(entity.id_empresa)),
+                    new SqlParameter("@cuit_empresa", Convert.ToInt32(entity.cuit)),
                     new SqlParameter("@nombre_empresa", entity.name),
-                    new SqlParameter("@direccion_empresa", entity.direccion)
+                    new SqlParameter("@direccion_empresa", entity.direccion),
+                    new SqlParameter("@fecha_creacion", entity.fecha_creacion),
+                    new SqlParameter("@fecha_modificacion", entity.fecha_modificacion)
                 });
 
             }

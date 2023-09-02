@@ -31,7 +31,7 @@ namespace DAL.Manager.Adapter
         {
             Rol rolAdapt = new Rol
             {
-                Id = int.Parse(values[(int)Columns.Id_Rol].ToString()),
+                Id = values[(int)Columns.Id_Rol].ToString(),
                 rol = values[(int)Columns.Rol].ToString()
             };
             return rolAdapt;

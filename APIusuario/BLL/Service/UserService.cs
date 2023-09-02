@@ -26,7 +26,9 @@ namespace BLL.Service
         {
             try
             {
-                usuario.Id = Guid.NewGuid();
+                usuario.Id = Guid.NewGuid().ToString();
+                usuario.fecha_creacion = DateTime.Now;
+                usuario.fecha_modificacion = DateTime.Now;
                 if (usuario.password != null)
                 {
                     usuario.password = EncrypService.EncryptPassword(usuario.password);
@@ -47,7 +49,7 @@ namespace BLL.Service
             try
             {
                 Usuario getUser = UserManager.Current.GetUserByUser(user);
-                if(getUser != null)
+                if(getUser.Id != null)
                 {
                     return true;
                 }
@@ -108,6 +110,7 @@ namespace BLL.Service
                 {
                     usuario.password = EncrypService.EncryptPassword(usuario.password);
                 }
+                usuario.fecha_modificacion = DateTime.Now;
                 UserManager.Current.Update(usuario);
                 RolUsuarioService.Current.UpdateRolUsuario(usuario);
             }

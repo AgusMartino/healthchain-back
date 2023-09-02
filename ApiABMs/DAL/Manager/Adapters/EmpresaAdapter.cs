@@ -30,10 +30,12 @@ namespace DAL.Manager.Adapters
         {
             Empresa empresa = new Empresa
             {
-                id = Guid.Parse(values[(int)Columns.id_empresa].ToString()),
+                id_empresa = values[(int)Columns.id_empresa].ToString(),
                 name = values[(int)Columns.nombre_empresa].ToString(),
-                cuit = int.Parse(values[(int)Columns.cuit_empresa].ToString()),
-                direccion = values[(int)Columns.direccion_empresa].ToString()
+                cuit = values[(int)Columns.cuit_empresa].ToString(),
+                direccion = values[(int)Columns.direccion_empresa].ToString(),
+                fecha_creacion = DateTime.Parse(values[(int)Columns.fecha_creacion].ToString()),
+                fecha_modificacion = DateTime.Parse(values[(int)Columns.fecha_modificacion].ToString()),
             };
             return empresa;
         }
@@ -43,7 +45,9 @@ namespace DAL.Manager.Adapters
             id_empresa,
             cuit_empresa,
             nombre_empresa,
-            direccion_empresa
+            direccion_empresa,
+            fecha_creacion,
+            fecha_modificacion
         }
     }
 

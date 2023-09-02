@@ -8,7 +8,7 @@ namespace Domain.DOMAIN
 {
     public class RolUsuario
     {
-        public Guid id_usuario { get; set; }
-        public int id_rol { get; set; }
+        public string id_usuario { get; set; }
+        public string id_rol { get; set; }
     }
 }

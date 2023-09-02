@@ -59,8 +59,6 @@ namespace BLL.Service
 
                 throw;
             }
-            
-            return rol;
         }
 
     }

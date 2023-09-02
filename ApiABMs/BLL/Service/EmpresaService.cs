@@ -31,11 +31,13 @@ namespace BLL.Service
         {
             try
             {
+                empresa.id_empresa = Guid.NewGuid().ToString();
+                empresa.fecha_creacion = DateTime.Now;
+                empresa.fecha_modificacion = DateTime.Now;
                 EmpresaManager.Current.Add(empresa);
             }
             catch (Exception ex)
             {
-
                 throw;
             }
         }

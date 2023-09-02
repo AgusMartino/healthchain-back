@@ -1,7 +1,9 @@
 ﻿using DAL.Interface;
+using DAL.Tools;
 using Domain.DOMAIN;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,19 +30,43 @@ namespace DAL.Manager
         #endregion
         public void Join(Usuario obj1, Rol obj2)
         {
+            string statement = "INSERT INTO usuario_rol(IdUsuario,IdRol) values (@IdUsuario, @IdRol)";
+            try
+            {
+                SqlHelper.ExecuteNonQuery(statement, System.Data.CommandType.Text, new SqlParameter[]
+                {
+                    new SqlParameter("@IdUsuario", obj2.Id),
+                    new SqlParameter("@IdPerfil", obj1.Id)
+                });
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
             throw new NotImplementedException();
         }
 
         public void delete(Usuario obj1, Rol obj2)
         {
+            string statement = "DELETE FROM [dbo].[usuario_rol] WHERE IdUsuario = @IdUsuario";
+            try
+            {
+                SqlHelper.ExecuteNonQuery(statement, System.Data.CommandType.Text, new SqlParameter("@IdUsuario", obj1.Id));
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            
             throw new NotImplementedException();
         }
 
-        public List<Rol> GetAll(Usuario obj)
+        public Rol GetOne(Guid obj)
         {
             throw new NotImplementedException();
         }
-        
     }
 
 }

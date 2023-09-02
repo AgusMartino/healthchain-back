@@ -1,4 +1,5 @@
-﻿using Domain.DOMAIN;
+﻿using DAL.Manager;
+using Domain.DOMAIN;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,19 +27,31 @@ namespace BLL.Service
         }
         #endregion
 
-        public void Add(RolUsuario rolUsuario)
+        public void Add(Usuario usuario)
         {
+            try
+            {
+                RolUsuarioManager.Current.Join(usuario, usuario.rol);
+            }
+            catch (Exception ex)
+            {
 
-        }
-
-        public RolUsuario GetRolUsuario(Guid user)
-        {
-            return null;
+                throw ex;
+            }
         }
 
         public void UpdateRolUsuario(Usuario usuario)
         {
+            try
+            {
+                RolUsuarioManager.Current.delete(usuario, usuario.rol);
+                RolUsuarioManager.Current.Join(usuario, usuario.rol);
+            }
+            catch (Exception ex)
+            {
 
+                throw ex;
+            }
         }
     }
 

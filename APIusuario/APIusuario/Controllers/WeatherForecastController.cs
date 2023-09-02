@@ -14,15 +14,12 @@ namespace APIusuario.Controllers
     };
 
         private readonly ILogger<WeatherForecastController> _logger;
-        private readonly IConfiguration _configuration;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger, IConfiguration configuration)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger)
         {
             _logger = logger;
-            _configuration = configuration;
         }
 
-        var db = _configuration.GetConnectionString
 
         [HttpGet(Name = "GetWeatherForecast")]
         public IEnumerable<WeatherForecast> Get()
@@ -31,8 +28,9 @@ namespace APIusuario.Controllers
             {
                 Date = DateTime.Now.AddDays(index),
                 TemperatureC = Random.Shared.Next(-20, 55),
-                Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-        })
+                Summary = Summaries[Random.Shared.Next(Summaries.Length)],
+                data = SqlHelper.conString.ToString()
+            })
             .ToArray();
         }
     }

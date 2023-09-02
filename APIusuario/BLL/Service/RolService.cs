@@ -1,4 +1,5 @@
-﻿using Domain.DOMAIN;
+﻿using DAL.Manager;
+using Domain.DOMAIN;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,14 +29,37 @@ namespace BLL.Service
 
         public List<Rol> GetRols()
         {
-            List<Rol> rols = new List<Rol>();
-            return rols;
+            try
+            {
+                List<Rol> rols = new List<Rol>();
+                rols = (List<Rol>)RolManager.Current.GetAll();
+                return rols;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            
 
         }
 
-        public Rol GetRol(string name)
+        public Rol GetRol(int name)
         {
-            Rol rol = new Rol();
+            try
+            {
+                Rol rol = new Rol();
+                string[] criterios = { "name" };
+                string[] valores = { name.ToString() };
+                rol = RolManager.Current.GetOne(criterios, valores);
+                return rol;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+            
             return rol;
         }
 

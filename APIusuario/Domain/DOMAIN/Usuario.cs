@@ -8,7 +8,8 @@
         public string name { get; set; }
         public string lastname { get; set; }
         public int user_type { get; set; }
-        public int rol { get; set; }
+        public int cuit_empresa { get; set; }
+        public Rol rol { get; set; }
 
     }
 }

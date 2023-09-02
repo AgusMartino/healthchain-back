@@ -59,7 +59,7 @@ namespace APIusuario.Controllers
         {
             try
             {
-                bool user = UserService.Current.LoginUserBO(usuario);
+                UserService.Current.UpdateUsuario(usuario);
                 return Ok();
             }
             catch (Exception ex)
@@ -68,22 +68,6 @@ namespace APIusuario.Controllers
                 throw ex;
             }
         }
-
-        [HttpPut(Name = "UpdateRolUser")]
-        public async Task<ActionResult> UpdateRolUser(Usuario usuario)
-        {
-            try
-            {
-                bool user = UserService.Current.LoginUserBO(usuario);
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return NotFound();
-                throw ex;
-            }
-        }
-
 
     }
 }

@@ -31,13 +31,8 @@ namespace BLL.Service
                 {
                     usuario.password = EncrypService.EncryptPassword(usuario.password);
                 }
-                UserManager.Current.RegisterUser(usuario);
-                RolUsuario rolUsuario = new RolUsuario
-                {
-                    id_rol = usuario.rol,
-                    id_usuario = usuario.Id
-                };
-                RolUsuarioService.Current.Add(rolUsuario);
+                UserManager.Current.Add(usuario);
+                RolUsuarioService.Current.Add(usuario);
             }
             catch (Exception ex)
             {
@@ -73,16 +68,54 @@ namespace BLL.Service
             try
             {
                 usuario.password = EncrypService.EncryptPassword(usuario.password);
-                return UserManager.Current.LoginUserBo(usuario.user, usuario.password);
+                Usuario usuarioValidate = UserManager.Current.LoginUserBo(usuario.user, usuario.password);
+                if(usuarioValidate != null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+                
             }
             catch (Exception ex)
             {
 
                 throw ex;
-            }
-            
+            } 
+        }
 
-             
+        public IEnumerable<Usuario> GetAll(int cuit_empresa)
+        {
+            try
+            {
+                List<Usuario> usuarios = new List<Usuario>();
+                usuarios = (List<Usuario>)UserManager.Current.GetAll(cuit_empresa);
+                return usuarios;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void UpdateUsuario(Usuario usuario)
+        {
+            try
+            {
+                if (usuario.password != null)
+                {
+                    usuario.password = EncrypService.EncryptPassword(usuario.password);
+                }
+                UserManager.Current.Update(usuario);
+                RolUsuarioService.Current.UpdateRolUsuario(usuario);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
         }
     }
 }

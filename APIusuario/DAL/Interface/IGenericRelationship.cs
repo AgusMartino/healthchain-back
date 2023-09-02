@@ -10,6 +10,6 @@ namespace DAL.Interface
     {
         void Join(T obj1, U obj2);
         void delete(T obj1, U obj2);
-        List<U> GetAll(T obj);
+        U GetOne(Guid obj);
     }
 }

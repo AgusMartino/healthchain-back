@@ -1,8 +1,11 @@
 using Auth0.AspNetCore.Authentication;
 using System.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using DAL.Tools;
 
 var builder = WebApplication.CreateBuilder(args);
+
+SqlHelper.conString = builder.Configuration.GetConnectionString("dbHealthChain");
 
 builder.Configuration.AddJsonFile("appsettings.json",
         optional: true,

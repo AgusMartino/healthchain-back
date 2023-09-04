@@ -38,7 +38,7 @@ namespace DAL.Manager.Adapter
                 id_usuario =values[(int)Columns.id_usuario].ToString(),
                 tipo_Solicitud = Tipo_solicitudManager.Current.GetOne(criterios, valores),
                 Descripcion = values[(int)Columns.Descripcion].ToString(),
-                aprobado = bool.Parse(values[(int)Columns.aprobado].ToString()),
+                estado = values[(int)Columns.Estado].ToString(),
                 fecha_creacion = DateTime.Parse(values[(int)Columns.fecha_creacion].ToString()),
                 fecha_modificacion = DateTime.Parse(values[(int)Columns.fecha_modificacion].ToString())
             };
@@ -52,7 +52,7 @@ namespace DAL.Manager.Adapter
             id_usuario,
             id_tipo_solicitud,
             Descripcion,
-            aprobado,
+            Estado,
             fecha_creacion,
             fecha_modificacion
         }

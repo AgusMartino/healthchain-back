@@ -34,12 +34,12 @@ namespace DAL.Manager
         #region Statements
         private string InsertStatement
         {
-            get => "INSERT INTO [dbo].[solicitudes] (id_solicitud, cuit_empresa, id_usuario, id_tipo_solicitud, Descripcion, aprobado, fecha_creacion, fecha_modificacion) VALUES (@id_solicitud, @cuit_empresa, @id_usuario, @id_tipo_solicitud, @Descripcion, @aprobado, @fecha_creacion, @fecha_modificacion)";
+            get => "INSERT INTO [dbo].[solicitudes] (id_solicitud, cuit_empresa, id_usuario, id_tipo_solicitud, Descripcion, Estado, fecha_creacion, fecha_modificacion) VALUES (@id_solicitud, @cuit_empresa, @id_usuario, @id_tipo_solicitud, @Descripcion, @Estado, @fecha_creacion, @fecha_modificacion)";
         }
 
         private string UpdateStatement
         {
-            get => "UPDATE [dbo].[solicitudes] SET id_tipo_solicitud = @id_tipo_solicitud, Descripcion = @Descripcion, aprobado = @aprobado, fecha_modificacion = @fecha_modificacion WHERE cuit_empresa = @cuit_empresa and id_usuario = @id_usuario";
+            get => "UPDATE [dbo].[solicitudes] SET id_tipo_solicitud = @id_tipo_solicitud, Descripcion = @Descripcion, Estado = @Estado, fecha_modificacion = @fecha_modificacion WHERE cuit_empresa = @cuit_empresa and id_usuario = @id_usuario";
         }
 
         private string DeleteStatement
@@ -102,7 +102,7 @@ namespace DAL.Manager
                     new SqlParameter("@id_usuario", Guid.Parse(entity.id_usuario)),
                     new SqlParameter("@id_tipo_solicitud", Convert.ToInt32(entity.tipo_Solicitud.id)),
                     new SqlParameter("@Descripcion", entity.Descripcion),
-                    new SqlParameter("@aprobado", entity.aprobado),
+                    new SqlParameter("@Estado", Convert.ToInt32(entity.estado)),
                     new SqlParameter("@fecha_creacion", entity.fecha_creacion),
                     new SqlParameter("@fecha_modificacion", entity.fecha_modificacion)
                 });
@@ -157,7 +157,7 @@ namespace DAL.Manager
                     new SqlParameter("@id_usuario", entity.id_usuario),
                     new SqlParameter("@id_tipo_solicitud", entity.tipo_Solicitud.id),
                     new SqlParameter("@Descripcion", entity.Descripcion),
-                    new SqlParameter("@aprobado", entity.aprobado),
+                    new SqlParameter("@Estado", Convert.ToInt32(entity.estado)),
                     new SqlParameter("@fecha_modificacion", entity.fecha_modificacion)
                 });
 

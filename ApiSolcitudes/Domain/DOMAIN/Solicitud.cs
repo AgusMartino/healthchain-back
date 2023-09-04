@@ -13,7 +13,7 @@ namespace Domain.DOMAIN
         public string id_usuario { get; set; }
         public tipo_solicitud tipo_Solicitud { get; set; }
         public string Descripcion { get; set; }
-        public bool aprobado { get; set; }
+        public string estado { get; set; }
         public DateTime fecha_creacion { get; set; }
         public DateTime fecha_modificacion { get; set; }
 

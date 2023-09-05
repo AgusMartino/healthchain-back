@@ -25,11 +25,11 @@ namespace APIusuario.Controllers
         }
 
         [HttpGet("{usuario}", Name = "ValidateUser")]
-        public async Task<ActionResult<bool>> ValidateUser(string usuario)
+        public async Task<ActionResult<Usuario>> ValidateUser(string usuario)
         {
             try
             {
-                bool user = UserService.Current.ValidateUser(usuario);
+                Usuario user = UserService.Current.ValidateUser(usuario);
                 return user;
             }
             catch (Exception ex)

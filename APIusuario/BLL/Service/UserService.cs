@@ -44,19 +44,12 @@ namespace BLL.Service
         }
 
 
-        public bool ValidateUser(string user)
+        public Usuario ValidateUser(string user)
         {
             try
             {
                 Usuario getUser = UserManager.Current.GetUserByUser(user);
-                if(getUser.Id != null)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                return getUser;
             }
             catch (Exception ex)
             {

@@ -74,7 +74,33 @@ namespace DAL.Manager
 
                 throw ex;
             }
-            
+
+        }
+
+        public Usuario GetUser(string user)
+        {
+            try
+            {
+                Usuario usuario = new Usuario();
+                string sql = "SELECT * FROM [dbo].[Usuario] WHERE id_usuario = @usuario";
+                using (var dr = SqlHelper.ExecuteReader(sql, System.Data.CommandType.Text, new SqlParameter[] {
+                                                       new SqlParameter("@usuario", Guid.Parse(user))}))
+                {
+                    while (dr.Read())
+                    {
+                        object[] vs = new object[dr.FieldCount];
+                        dr.GetValues(vs);
+                        usuario = UserAdapter.Current.adapt(vs);
+                    }
+                }
+                return usuario;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
         }
 
         public Usuario LoginUserBo(string user, string password)

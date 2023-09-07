@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
+using System.Net.Http;
 
 namespace BLL.Service
 {
@@ -82,6 +84,21 @@ namespace BLL.Service
             {
                 List<Solicitud> solicituds = new List<Solicitud>();
                 solicituds = (List<Solicitud>)SolicitudManager.Current.GetAllSolicitudes(tipo, cuit);
+                return solicituds;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        public IEnumerable<Solicitud> GetAllSolicitudesUser(string id_usuario)
+        {
+            try
+            {
+                List<Solicitud> solicituds = new List<Solicitud>();
+                solicituds = (List<Solicitud>)SolicitudManager.Current.GetAllSolicitudesUser(id_usuario);
                 return solicituds;
             }
             catch (Exception ex)

@@ -113,5 +113,19 @@ namespace BLL.Service
                 throw;
             }
         }
+
+        public Usuario GetUser(string user)
+        {
+            try
+            {
+                Usuario getUser = UserManager.Current.GetUser(user);
+                return getUser;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
     }
 }

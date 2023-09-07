@@ -70,5 +70,21 @@ namespace ApiSolicitudes.Controllers
                 throw ex;
             }
         }
+
+        [HttpGet("{id_usuario}",Name = "GetAllSolicitudesUsuario")]
+        public async Task<ActionResult<List<Solicitud>>> GetAllSolicitudesUsuario(string id_usuario)
+        {
+            try
+            {
+                List<Solicitud> solicituds = new List<Solicitud>();
+                solicituds = (List<Solicitud>)SolicitudService.Current.GetAllSolicitudesUser(id_usuario);
+                return solicituds;
+            }
+            catch (Exception ex)
+            {
+                return NotFound();
+                throw ex;
+            }
+        }
     }
 }

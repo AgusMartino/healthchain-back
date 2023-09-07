@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
+using System.Net.Http;
 
 namespace DAL.Manager.Adapter
 {
@@ -35,12 +37,14 @@ namespace DAL.Manager.Adapter
             {
                 id_solicitud = values[(int)Columns.id_solicitud].ToString(),
                 cuit_empresa = values[(int)Columns.cuit_empresa].ToString(),
-                id_usuario =values[(int)Columns.id_usuario].ToString(),
+                id_usuario = values[(int)Columns.id_usuario].ToString(),
                 tipo_Solicitud = Tipo_solicitudManager.Current.GetOne(criterios, valores),
                 Descripcion = values[(int)Columns.Descripcion].ToString(),
                 estado = values[(int)Columns.Estado].ToString(),
                 fecha_creacion = DateTime.Parse(values[(int)Columns.fecha_creacion].ToString()),
-                fecha_modificacion = DateTime.Parse(values[(int)Columns.fecha_modificacion].ToString())
+                fecha_modificacion = DateTime.Parse(values[(int)Columns.fecha_modificacion].ToString()),
+                user = GetNombreUser(values[(int)Columns.id_usuario].ToString()),
+                nombreEmpresa = GetNombreEmpresa(values[(int)Columns.cuit_empresa].ToString())
             };
             return solicitud;
         }
@@ -54,7 +58,37 @@ namespace DAL.Manager.Adapter
             Descripcion,
             Estado,
             fecha_creacion,
-            fecha_modificacion
+            fecha_modificacion,
+        }
+
+        public string GetNombreUser(string guid)
+        {
+            string user = "";
+            using(var client = new HttpClient())
+            {
+                string url = "https://localhost:7151/api/User/GetUser/" + guid;
+                client.DefaultRequestHeaders.Clear();
+                var response = client.GetAsync(url).Result;
+                var res = response.Content.ReadAsStringAsync().Result;
+                dynamic r = JObject.Parse(res);
+                user = r[1];
+            }
+            return user;
+        }
+
+        public string GetNombreEmpresa(string cuit)
+        {
+            string name = "";
+            using (var client = new HttpClient())
+            {
+                string url = "https://localhost:7227/api/Empresa/GetOneEmpresa/" + cuit;
+                client.DefaultRequestHeaders.Clear();
+                var response = client.GetAsync(url).Result;
+                var res = response.Content.ReadAsStringAsync().Result;
+                dynamic r = JObject.Parse(res);
+                name = r[2];
+            }
+            return name;
         }
     }
 

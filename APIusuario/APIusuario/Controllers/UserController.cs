@@ -69,5 +69,20 @@ namespace APIusuario.Controllers
             }
         }
 
+        [HttpGet("{usuario}", Name = "GetUser")]
+        public async Task<ActionResult<Usuario>> GetUser(string usuario)
+        {
+            try
+            {
+                Usuario user = UserService.Current.GetUser(usuario);
+                return user;
+            }
+            catch (Exception ex)
+            {
+                return NotFound();
+                throw ex;
+            }
+        }
+
     }
 }

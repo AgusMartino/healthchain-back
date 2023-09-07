@@ -16,6 +16,8 @@ namespace Domain.DOMAIN
         public string estado { get; set; }
         public DateTime fecha_creacion { get; set; }
         public DateTime fecha_modificacion { get; set; }
+        public string user { get; set; }
+        public string nombreEmpresa { get; set; }
 
 
     }

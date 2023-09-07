@@ -147,6 +147,36 @@ namespace DAL.Manager
             return list;
         }
 
+        public IEnumerable<Solicitud> GetAllSolicitudesUser(string id_user)
+        {
+            List<Solicitud> list = new List<Solicitud>();
+            Solicitud solicitud = new Solicitud();
+            string statement = "SELECT * FROM [dbo].[solicitudes] WHERE id_usuario = @id_usuario";
+            try
+            {
+                using (var dr = SqlHelper.ExecuteReader(statement, System.Data.CommandType.Text, new SqlParameter[]
+                {
+                    new SqlParameter("@id_usuario", Guid.Parse(id_user))
+                }))
+                {
+                    while (dr.Read())
+                    {
+                        object[] vs = new object[dr.FieldCount];
+                        dr.GetValues(vs);
+                        solicitud = SolicitudAdapter.Current.adapt(vs);
+                        list.Add(solicitud);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return list;
+        }
+
+        
+
         public void Update(Solicitud entity)
         {
             try

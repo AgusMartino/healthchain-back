@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "c0o1q1MxtikMwwg+Yd694k9SvQv6aITtxLJIX2Q37gH+92jgQhbOO2WV9A1P6d/Rv7CNT5Ud6UDpfbJ8GR62Gg==",
+  "dgSpecHash": "rTTS10hQCnu50+hcHld5E6rzVcNA4EGMZ0S9X8sc9fGXQOVefatn7jaEpUZW5NFkTQ2djYJontVr/dIpUw5Q3Q==",
   "success": true,
   "projectFilePath": "R:\\Agus\\Facultad\\TFI 5to\\healthchain-back\\ApiSolcitudes\\ApiSolicitudes\\ApiSolicitudes.csproj",
   "expectedPackageFiles": [
@@ -8,6 +8,7 @@
     "C:\\Users\\Agus\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\Agus\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
     "C:\\Users\\Agus\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
+    "C:\\Users\\Agus\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
     "C:\\Users\\Agus\\.nuget\\packages\\runtime.native.system.data.sqlclient.sni\\4.7.0\\runtime.native.system.data.sqlclient.sni.4.7.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\runtime.win-arm64.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-arm64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\runtime.win-x64.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-x64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",

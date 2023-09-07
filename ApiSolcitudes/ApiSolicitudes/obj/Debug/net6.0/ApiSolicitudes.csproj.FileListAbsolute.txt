@@ -37,3 +37,4 @@ R:\Agus\Facultad\TFI 5to\healthchain-back\ApiSolcitudes\ApiSolicitudes\obj\Debug
 R:\Agus\Facultad\TFI 5to\healthchain-back\ApiSolcitudes\ApiSolicitudes\obj\Debug\net6.0\ApiSolicitudes.pdb
 R:\Agus\Facultad\TFI 5to\healthchain-back\ApiSolcitudes\ApiSolicitudes\obj\Debug\net6.0\ApiSolicitudes.genruntimeconfig.cache
 R:\Agus\Facultad\TFI 5to\healthchain-back\ApiSolcitudes\ApiSolicitudes\obj\Debug\net6.0\ref\ApiSolicitudes.dll
+R:\Agus\Facultad\TFI 5to\healthchain-back\ApiSolcitudes\ApiSolicitudes\bin\Debug\net6.0\Newtonsoft.Json.dll

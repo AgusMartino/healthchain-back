@@ -84,5 +84,20 @@ namespace APIusuario.Controllers
             }
         }
 
+        [HttpGet("{cuit_empresa}", Name = "GetUsersEmpresas")]
+        public async Task<ActionResult<List<Usuario>>> GetUsersEmpresas(string cuit_empresa)
+        {
+            try
+            {
+                List<Usuario> users = (List<Usuario>)UserService.Current.GetAll((int)Convert.ToUInt32(cuit_empresa));
+                return users;
+            }
+            catch (Exception ex)
+            {
+                return NotFound();
+                throw ex;
+            }
+        }
+
     }
 }

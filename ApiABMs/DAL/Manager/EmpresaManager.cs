@@ -134,6 +134,36 @@ namespace DAL.Manager
             return list;
         }
 
+        public IEnumerable<Empresa> GetAllEmpresasAsociadasMedico(string userid)
+        {
+            List<Empresa> list = new List<Empresa>();
+            Empresa empresa = new Empresa();
+            string sql = "Select e.id_empresa, e.cuit_empresa, e.nombre_empresa, e.direccion_empresa, e.fecha_creacion, e.fecha_modificacion from Empresa as e"
+                         + "join medico_empresa as me on me.id_empresa = e.id_empresa"
+                         + "where me.id_usuario_medico = @usuario";
+            try
+            {
+                using (var dr = SqlHelper.ExecuteReader(sql, System.Data.CommandType.Text, new SqlParameter[]
+                {
+                     new SqlParameter("@usuario", Guid.Parse(userid)),
+                }))
+                {
+                    while (dr.Read())
+                    {
+                        object[] vs = new object[dr.FieldCount];
+                        dr.GetValues(vs);
+                        empresa = EmpresaAdapter.Current.adapt(vs);
+                        list.Add(empresa);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return list;
+        }
+
         public void Update(Empresa entity)
         {
             throw new NotImplementedException();

@@ -11,6 +11,7 @@ namespace Domain.DOMAIN
         public string id_solicitud { get; set; }
         public string cuit_empresa { get; set; }
         public string id_usuario { get; set; }
+        public string Rolseleccionado { get; set; }
         public tipo_solicitud tipo_Solicitud { get; set; }
         public string Descripcion { get; set; }
         public string estado { get; set; }

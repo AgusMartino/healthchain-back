@@ -44,13 +44,13 @@ namespace BLL.Service
 
         }
 
-        public Rol GetRol(int name)
+        public Rol GetRol(int id)
         {
             try
             {
                 Rol rol = new Rol();
-                string[] criterios = { "name" };
-                string[] valores = { name.ToString() };
+                string[] criterios = { "id" };
+                string[] valores = { id.ToString() };
                 rol = RolManager.Current.GetOne(criterios, valores);
                 return rol;
             }

@@ -44,7 +44,8 @@ namespace DAL.Manager.Adapter
                 fecha_creacion = DateTime.Parse(values[(int)Columns.fecha_creacion].ToString()),
                 fecha_modificacion = DateTime.Parse(values[(int)Columns.fecha_modificacion].ToString()),
                 user = GetNombreUser(values[(int)Columns.id_usuario].ToString()),
-                nombreEmpresa = GetNombreEmpresa(values[(int)Columns.cuit_empresa].ToString())
+                nombreEmpresa = GetNombreEmpresa(values[(int)Columns.cuit_empresa].ToString()),
+                Rolseleccionado = GetRol(values[(int)Columns.id_Rol_seleccionado].ToString())
             };
             return solicitud;
         }
@@ -55,6 +56,7 @@ namespace DAL.Manager.Adapter
             cuit_empresa,
             id_usuario,
             id_tipo_solicitud,
+            id_Rol_seleccionado,
             Descripcion,
             Estado,
             fecha_creacion,
@@ -89,6 +91,21 @@ namespace DAL.Manager.Adapter
                 name = r[2];
             }
             return name;
+        }
+
+        public string GetRol(string id)
+        {
+            string rol = "";
+            using(var client = new HttpClient())
+            {
+                string url = "https://localhost:7151/api/Rol/GetRol/" + id;
+                client.DefaultRequestHeaders.Clear();
+                var response = client.GetAsync(url).Result;
+                var res = response.Content.ReadAsStringAsync().Result;
+                dynamic r = JObject.Parse(res);
+                rol = r[1];
+            }
+            return rol;
         }
     }
 

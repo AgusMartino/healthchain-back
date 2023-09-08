@@ -55,5 +55,21 @@ namespace ApiABMs.Controllers
                 throw ex;
             }
         }
+
+        [HttpGet("{username}",Name = "GetAllEmpresaAsociadasMedico")]
+        public async Task<ActionResult<List<Empresa>>> GetAllEmpresaAsociadasMedico(string username)
+        {
+            try
+            {
+                List<Empresa> Empresa = new List<Empresa>();
+                Empresa = (List<Empresa>)EmpresaService.Current.GetAll();
+                return Empresa;
+            }
+            catch (Exception ex)
+            {
+                return NotFound();
+                throw ex;
+            }
+        }
     }
 }

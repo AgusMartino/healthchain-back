@@ -34,7 +34,7 @@ namespace DAL.Manager
         #region Statements
         private string InsertStatement
         {
-            get => "INSERT INTO [dbo].[solicitudes] (id_solicitud, cuit_empresa, id_usuario, id_tipo_solicitud, Descripcion, Estado, fecha_creacion, fecha_modificacion) VALUES (@id_solicitud, @cuit_empresa, @id_usuario, @id_tipo_solicitud, @Descripcion, @Estado, @fecha_creacion, @fecha_modificacion)";
+            get => "INSERT INTO [dbo].[solicitudes] (id_solicitud, cuit_empresa, id_usuario, id_tipo_solicitud, Descripcion, Estado, fecha_creacion, fecha_modificacion, id_Rol_solicitado) VALUES (@id_solicitud, @cuit_empresa, @id_usuario, @id_tipo_solicitud, @Descripcion, @Estado, @fecha_creacion, @fecha_modificacion, @id_Rol_solicitado)";
         }
 
         private string UpdateStatement
@@ -104,7 +104,8 @@ namespace DAL.Manager
                     new SqlParameter("@Descripcion", entity.Descripcion),
                     new SqlParameter("@Estado", Convert.ToInt32(entity.estado)),
                     new SqlParameter("@fecha_creacion", entity.fecha_creacion),
-                    new SqlParameter("@fecha_modificacion", entity.fecha_modificacion)
+                    new SqlParameter("@fecha_modificacion", entity.fecha_modificacion),
+                    new SqlParameter("@id_Rol_solicitado", entity.Rolseleccionado)
                 });
 
             }

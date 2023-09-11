@@ -62,10 +62,38 @@ namespace DAL.Manager
 
                 throw ex;
             }
-            
         }
 
-        
+        public Medico GetMedico(string username)
+        {
+            try
+            {
+                Medico medico = new Medico();
+                string sqlstatemen = "SELECT u.nombre, u.apellido, u.usuario, e.especialidad"
+                                    + "from usuario as u"
+                                    + "join medico_especialidad as m on m.id_usuario = u.id_usuario"
+                                    + "join especialidades as e on e.id_especialidad = m.id_especialidad"
+                                    + "where u.usuario = @usuario";
+                using (var dr = SqlHelper.ExecuteReader(sqlstatemen, System.Data.CommandType.Text, new SqlParameter[]
+                {
+                new SqlParameter("@usuario", Guid.Parse(username))
+                }))
+                {
+                    if (dr.Read())
+                    {
+                        object[] values = new object[dr.FieldCount];
+                        dr.GetValues(values);
+                        medico = MedicoAdapter.Current.adapt(values);
+                    }
+                }
+                return medico;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
     }
 
 }

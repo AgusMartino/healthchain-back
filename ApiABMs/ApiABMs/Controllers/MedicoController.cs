@@ -24,5 +24,21 @@ namespace ApiABMs.Controllers
                 throw ex;
             }
         }
+
+        [HttpGet("{username}", Name = "GetMedico")]
+        public async Task<ActionResult<Medico>> GetMedico(string username)
+        {
+            try
+            {
+                Medico medico = new Medico();
+                medico = MedicoService.Current.GetMedico(username);
+                return medico;
+            }
+            catch (Exception ex)
+            {
+                return NotFound();
+                throw ex;
+            }
+        }
     }
 }

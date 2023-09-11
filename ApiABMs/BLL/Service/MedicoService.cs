@@ -42,6 +42,21 @@ namespace BLL.Service
                 throw ex;
             }
         }
+
+        public Medico GetMedico(string username)
+        {
+            try
+            {
+                Medico medico = new Medico();
+                medico = MedicoManager.Current.GetMedico(username);
+                return medico;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
     }
 
 }

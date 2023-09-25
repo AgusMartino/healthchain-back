@@ -146,13 +146,13 @@ namespace DAL.Manager
             {
                 SqlHelper.ExecuteNonQuery(InsertStatement, System.Data.CommandType.Text, new SqlParameter[]
                 {
-                    new SqlParameter("@id_usuario", Guid.Parse(entity.Id)),
+                    new SqlParameter("@id_usuario", Guid.Parse(entity.id)),
                     new SqlParameter("@usuario", entity.user),
                     new SqlParameter("@nombre", entity.name),
                     new SqlParameter("@contraseña", entity.password),
                     new SqlParameter("@apellido", entity.lastname),
-                    new SqlParameter("@tipo_usuario", Convert.ToInt32(entity.rol.Id)),
-                    new SqlParameter("@cuit_empresa", Convert.ToInt32(entity.cuit_empresa)),
+                    new SqlParameter("@tipo_usuario", int.Parse(entity.user_type)),
+                    new SqlParameter("@cuit_empresa", entity.cuit_empresa),
                     new SqlParameter("@fecha_creacion", entity.fecha_creacion),
                     new SqlParameter("@fecha_modificacion", entity.fecha_modificacion)
                 });
@@ -164,14 +164,14 @@ namespace DAL.Manager
             }
         }
 
-        public IEnumerable<Usuario> GetAll(int cuit_empresa)
+        public IEnumerable<Usuario> GetAll(string cuit_empresa)
         {
 
             try
             {
                 Usuario usuario = new Usuario();
                 List<Usuario> usuarioList = new List<Usuario>();
-                string statement = "SELECT * FROM [dbo].[Usuario] WHERE cuit_empresa = @cuit_empresa";
+                string statement = "SELECT * FROM [dbo].[Usuario] WHERE cuit_empresa = @cuit_empresa and tipo_usuario = 1";
                 using (var dr = SqlHelper.ExecuteReader(statement, System.Data.CommandType.Text, new SqlParameter[] {
                                                        new SqlParameter("@cuit_empresa", cuit_empresa)}))
                 {
@@ -203,20 +203,20 @@ namespace DAL.Manager
             {
                 SqlHelper.ExecuteNonQuery(UpdateStatement, System.Data.CommandType.Text, new SqlParameter[]
                 {
-                    new SqlParameter("@id_usuario", Guid.Parse(entity.Id)),
+                    new SqlParameter("@id_usuario", Guid.Parse(entity.id)),
                     new SqlParameter("@usuario", entity.user),
                     new SqlParameter("@nombre", entity.name),
                     new SqlParameter("@contraseña", entity.password),
                     new SqlParameter("@apellido", entity.lastname),
                     new SqlParameter("@tipo_usuario", Convert.ToInt32(entity.rol.Id)),
-                    new SqlParameter("@cuit_empresa", Convert.ToInt32(entity.cuit_empresa)),
+                    new SqlParameter("@cuit_empresa", entity.cuit_empresa),
                     new SqlParameter("@fecha_modificacion", entity.fecha_modificacion)
                 });
             }
             catch (Exception ex)
             {
 
-                throw;
+                throw ex;
             }
         }
     }

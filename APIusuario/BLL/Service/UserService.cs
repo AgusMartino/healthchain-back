@@ -26,9 +26,13 @@ namespace BLL.Service
         {
             try
             {
-                usuario.Id = Guid.NewGuid().ToString();
+                usuario.id = Guid.NewGuid().ToString();
                 usuario.fecha_creacion = DateTime.Now;
                 usuario.fecha_modificacion = DateTime.Now;
+                if(usuario.cuit_empresa == "" || usuario.cuit_empresa == "null")
+                {
+                    usuario.cuit_empresa = null;
+                }
                 if (usuario.password != null)
                 {
                     usuario.password = EncrypService.EncryptPassword(usuario.password);
@@ -58,20 +62,13 @@ namespace BLL.Service
             }
         }
 
-        public bool LoginUserBO(Usuario usuario)
+        public Usuario LoginUserBO(UsuarioLoginBO usuario)
         {
             try
             {
                 usuario.password = EncrypService.EncryptPassword(usuario.password);
-                Usuario usuarioValidate = UserManager.Current.LoginUserBo(usuario.user, usuario.password);
-                if(usuarioValidate != null)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                Usuario usuarioValidate = UserManager.Current.LoginUserBo(usuario.usuario, usuario.password);
+                return usuarioValidate;
                 
             }
             catch (Exception ex)
@@ -81,7 +78,7 @@ namespace BLL.Service
             } 
         }
 
-        public IEnumerable<Usuario> GetAll(int cuit_empresa)
+        public IEnumerable<Usuario> GetAll(string cuit_empresa)
         {
             try
             {
@@ -99,7 +96,7 @@ namespace BLL.Service
         {
             try
             {
-                if (usuario.password != null)
+                if (usuario.password != null || usuario.password != "")
                 {
                     usuario.password = EncrypService.EncryptPassword(usuario.password);
                 }

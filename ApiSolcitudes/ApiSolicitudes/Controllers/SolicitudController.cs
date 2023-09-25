@@ -24,13 +24,13 @@ namespace ApiSolicitudes.Controllers
             }
         }
 
-        [HttpGet(Name = "GetOneSolicitud")]
+        [HttpPost(Name = "GetOneSolicitud")]
         public async Task<ActionResult<Solicitud>> GetOneSolicitud(GetOneDomain getOneDomain)
         {
             try
             {
                 Solicitud solicitud = new Solicitud();
-                solicitud = SolicitudService.Current.GetOne(Convert.ToInt32(getOneDomain.cuit), Guid.Parse(getOneDomain.usuario));
+                solicitud = SolicitudService.Current.GetOne(getOneDomain.cuit, Guid.Parse(getOneDomain.usuario));
                 return solicitud;
             }
             catch (Exception ex)
@@ -40,13 +40,13 @@ namespace ApiSolicitudes.Controllers
             }
         }
 
-        [HttpGet(Name = "GetAllSolicitudes")]
+        [HttpPost(Name = "GetAllSolicitudes")]
         public async Task<ActionResult<List<Solicitud>>> GetAllSolicitudes(GetAllDomain getAllDomain)
         {
             try
             {
                 List<Solicitud> solicituds = new List<Solicitud>();
-                solicituds = (List<Solicitud>)SolicitudService.Current.GetAll(Convert.ToInt32(getAllDomain.tipo), Convert.ToInt32(getAllDomain.cuit));
+                solicituds = (List<Solicitud>)SolicitudService.Current.GetAll(Convert.ToInt32(getAllDomain.tipo), getAllDomain.cuit);
                 return solicituds;
             }
             catch (Exception ex)

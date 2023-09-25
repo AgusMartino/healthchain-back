@@ -35,7 +35,7 @@ namespace DAL.Manager
             {
                 SqlHelper.ExecuteNonQuery(statement, System.Data.CommandType.Text, new SqlParameter[]
                 {
-                    new SqlParameter("@IdUsuario", Guid.Parse(obj1.Id)),
+                    new SqlParameter("@IdUsuario", Guid.Parse(obj1.id)),
                     new SqlParameter("@IdRol", Convert.ToInt32(obj2.Id))
                 });
             }
@@ -51,7 +51,7 @@ namespace DAL.Manager
             string statement = "DELETE FROM [dbo].[usuario_rol] WHERE IdUsuario = @IdUsuario";
             try
             {
-                SqlHelper.ExecuteNonQuery(statement, System.Data.CommandType.Text, new SqlParameter("@IdUsuario", Guid.Parse(obj1.Id)));
+                SqlHelper.ExecuteNonQuery(statement, System.Data.CommandType.Text, new SqlParameter("@IdUsuario", Guid.Parse(obj1.id)));
             }
             catch (Exception ex)
             {

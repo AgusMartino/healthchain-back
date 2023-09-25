@@ -44,10 +44,10 @@ namespace BLL.Service
             }
         }
         
-        public Empresa GetOne(int cuit)
+        public Empresa GetOne(string cuit)
         {
             string[] criterios = { "cuit" };
-            string[] valores = { cuit.ToString() };
+            string[] valores = { cuit };
             Empresa empresa = new Empresa();
             try
             {

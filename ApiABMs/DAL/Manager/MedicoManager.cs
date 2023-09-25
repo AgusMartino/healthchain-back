@@ -30,24 +30,19 @@ namespace DAL.Manager
         }
         #endregion
 
-        public IEnumerable<Medico> GetMedicosEmpresa(string guidEmpresa)
+        public IEnumerable<Medico> GetMedicosEmpresa(string cuitEmpresa)
         {
             try
             {
                 List<Medico> medicos = new List<Medico>();
                 Medico medico = new Medico();
-                string sqlstatemen = "SELECT u.nombre, u.apellido, u.usuario, e.especialidad"
-                                    + "from medico_empresa as me"
-                                    + "join usuario as u on u.id_usuario = me.id_medico_empresa"
-                                    + "join medico_especialidad as m on m.id_usuario = u.id_usuario"
-                                    + "join especialidades as e on e.id_especialidad = m.id_especialidad"
-                                    + "where me.id_empresa = @empresa";
+                string sqlstatemen = "SELECT u.nombre, u.apellido, u.usuario, e.especialidad from medico_empresa as me join Empresa as empr on empr.id_empresa = me.id_empresa join usuario as u on u.id_usuario = me.id_usuario_medico join medico_especialidad as m on m.id_usuario = u.id_usuario join especialidades as e on e.id_especialidad = m.id_especialidad where empr.cuit_empresa = @empresa";
                 using (var dr = SqlHelper.ExecuteReader(sqlstatemen, System.Data.CommandType.Text, new SqlParameter[]
                 {
-                new SqlParameter("@empresa", Guid.Parse(guidEmpresa))
+                new SqlParameter("@empresa", cuitEmpresa)
                 }))
                 {
-                    if (dr.Read())
+                    while (dr.Read())
                     {
                         object[] values = new object[dr.FieldCount];
                         dr.GetValues(values);
@@ -69,11 +64,7 @@ namespace DAL.Manager
             try
             {
                 Medico medico = new Medico();
-                string sqlstatemen = "SELECT u.nombre, u.apellido, u.usuario, e.especialidad"
-                                    + "from usuario as u"
-                                    + "join medico_especialidad as m on m.id_usuario = u.id_usuario"
-                                    + "join especialidades as e on e.id_especialidad = m.id_especialidad"
-                                    + "where u.usuario = @usuario";
+                string sqlstatemen = "SELECT u.nombre, u.apellido, u.usuario, e.especialidad from usuario as u join medico_especialidad as m on m.id_usuario = u.id_usuario join especialidades as e on e.id_especialidad = m.id_especialidad where u.id_usuario = @usuario";
                 using (var dr = SqlHelper.ExecuteReader(sqlstatemen, System.Data.CommandType.Text, new SqlParameter[]
                 {
                 new SqlParameter("@usuario", Guid.Parse(username))

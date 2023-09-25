@@ -2,6 +2,7 @@
 using BLL.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Cors;
 
 namespace APIusuario.Controllers
 {
@@ -39,12 +40,12 @@ namespace APIusuario.Controllers
             }
         }
 
-        [HttpGet(Name = "LoginUserBO")]
-        public async Task<ActionResult<bool>> LoginUserBO(Usuario usuario)
+        [HttpPost(Name = "LoginUserBO")]
+        public async Task<ActionResult<Usuario>> LoginUserBO(UsuarioLoginBO usuario)
         {
             try
             {
-                bool user = UserService.Current.LoginUserBO(usuario);
+                Usuario user = UserService.Current.LoginUserBO(usuario);
                 return user;
             }
             catch (Exception ex)
@@ -89,7 +90,7 @@ namespace APIusuario.Controllers
         {
             try
             {
-                List<Usuario> users = (List<Usuario>)UserService.Current.GetAll((int)Convert.ToUInt32(cuit_empresa));
+                List<Usuario> users = (List<Usuario>)UserService.Current.GetAll(cuit_empresa);
                 return users;
             }
             catch (Exception ex)

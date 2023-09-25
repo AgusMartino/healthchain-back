@@ -67,3 +67,8 @@ R:\Agus\Facultad\TFI 5to\healthchain-back\APIusuario\APIusuario\obj\Debug\net6.0
 R:\Agus\Facultad\TFI 5to\healthchain-back\APIusuario\APIusuario\obj\Debug\net6.0\APIusuario.pdb
 R:\Agus\Facultad\TFI 5to\healthchain-back\APIusuario\APIusuario\obj\Debug\net6.0\APIusuario.genruntimeconfig.cache
 R:\Agus\Facultad\TFI 5to\healthchain-back\APIusuario\APIusuario\obj\Debug\net6.0\ref\APIusuario.dll
+R:\Agus\Facultad\TFI 5to\healthchain-back\APIusuario\APIusuario\obj\Debug\net6.0\staticwebassets\msbuild.APIusuario.Microsoft.AspNetCore.StaticWebAssets.props
+R:\Agus\Facultad\TFI 5to\healthchain-back\APIusuario\APIusuario\obj\Debug\net6.0\staticwebassets\msbuild.build.APIusuario.props
+R:\Agus\Facultad\TFI 5to\healthchain-back\APIusuario\APIusuario\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.APIusuario.props
+R:\Agus\Facultad\TFI 5to\healthchain-back\APIusuario\APIusuario\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.APIusuario.props
+R:\Agus\Facultad\TFI 5to\healthchain-back\APIusuario\APIusuario\obj\Debug\net6.0\staticwebassets.pack.json

@@ -5,6 +5,15 @@ using DAL.Tools;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddCors(options =>
+        options.AddPolicy(name: "DevelopmentPolicy",
+        builder =>
+        {
+            builder.AllowAnyOrigin()
+                   .AllowAnyHeader()
+                   .AllowAnyMethod();
+        }));
+
 SqlHelper.conString = builder.Configuration.GetConnectionString("dbHealthChain");
 
 builder.Configuration.AddJsonFile("appsettings.json",
@@ -26,10 +35,12 @@ var app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI();
 
-app.UseAuthorization();
-
 app.UseHttpsRedirection();
 
+app.UseCors("DevelopmentPolicy");
+app.UseAuthorization();
+
 app.MapControllers();
+
 
 app.Run();

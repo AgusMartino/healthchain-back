@@ -25,7 +25,7 @@ namespace ApiABMs.Controllers
         }
 
         [HttpGet("{cuit}",Name = "GetOneEmpresa")]
-        public async Task<ActionResult<Empresa>> GetOneEmpresa(int cuit)
+        public async Task<ActionResult<Empresa>> GetOneEmpresa(string cuit)
         {
             try
             {

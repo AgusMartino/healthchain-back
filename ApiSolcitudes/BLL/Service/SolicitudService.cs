@@ -30,7 +30,7 @@ namespace BLL.Service
         }
         #endregion
 
-        public Solicitud GetOne(int cuit, Guid usuario)
+        public Solicitud GetOne(string cuit, Guid usuario)
         {
             try
             {
@@ -78,7 +78,7 @@ namespace BLL.Service
             }
         }
 
-        public IEnumerable<Solicitud> GetAll(int tipo, int cuit)
+        public IEnumerable<Solicitud> GetAll(int tipo, string cuit)
         {
             try
             {

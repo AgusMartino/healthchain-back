@@ -33,11 +33,13 @@ namespace DAL.Manager.Adapter
             string[] valores = { values[(int)Columns.tipo_usuario].ToString() };
             Usuario usuario = new Usuario
             {
-                Id = values[(int)Columns.id_usuario].ToString(),
+                id = values[(int)Columns.id_usuario].ToString(),
                 user = values[(int)Columns.usuario].ToString(),
                 password = values[(int)Columns.contraseña].ToString(),
                 name = values[(int)Columns.nombre].ToString(),
                 lastname = values[(int)Columns.apellido].ToString(),
+                user_type = values[(int)Columns.tipo_usuario].ToString(),
+                cuit_empresa = values[(int)Columns.cuit_empresa].ToString(),
                 rol = RolManager.Current.GetOne(criterios , valores ),
                 fecha_creacion = DateTime.Parse(values[(int)Columns.fecha_creacion].ToString()),
                 fecha_modificacion = DateTime.Parse(values[(int)Columns.fecha_modificacion].ToString())

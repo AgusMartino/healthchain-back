@@ -98,7 +98,7 @@ namespace DAL.Manager
                 SqlHelper.ExecuteNonQuery(InsertStatement, System.Data.CommandType.Text, new SqlParameter[]
                 {
                     new SqlParameter("@id_solicitud", Guid.Parse(entity.id_solicitud)),
-                    new SqlParameter("@cuit_empresa", Convert.ToInt32(entity.cuit_empresa)),
+                    new SqlParameter("@cuit_empresa", entity.cuit_empresa),
                     new SqlParameter("@id_usuario", Guid.Parse(entity.id_usuario)),
                     new SqlParameter("@id_tipo_solicitud", Convert.ToInt32(entity.tipo_Solicitud.id)),
                     new SqlParameter("@Descripcion", entity.Descripcion),
@@ -120,7 +120,7 @@ namespace DAL.Manager
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Solicitud> GetAllSolicitudes(int id_tipo_solicitud, int cuit_empresa)
+        public IEnumerable<Solicitud> GetAllSolicitudes(int id_tipo_solicitud, string cuit_empresa)
         {
             List<Solicitud> list = new List<Solicitud>();
             Solicitud solicitud = new Solicitud();

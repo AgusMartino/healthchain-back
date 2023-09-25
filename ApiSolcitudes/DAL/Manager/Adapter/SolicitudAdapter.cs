@@ -66,14 +66,16 @@ namespace DAL.Manager.Adapter
         public string GetNombreUser(string guid)
         {
             string user = "";
-            using(var client = new HttpClient())
+            using(var clientHandler = new HttpClientHandler())
             {
                 string url = "https://localhost:7151/api/User/GetUser/" + guid;
+                clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+                HttpClient client = new HttpClient(clientHandler);
                 client.DefaultRequestHeaders.Clear();
                 var response = client.GetAsync(url).Result;
                 var res = response.Content.ReadAsStringAsync().Result;
                 dynamic r = JObject.Parse(res);
-                user = r[1];
+                user = Convert.ToString(r["name"]);
             }
             return user;
         }
@@ -81,14 +83,16 @@ namespace DAL.Manager.Adapter
         public string GetNombreEmpresa(string cuit)
         {
             string name = "";
-            using (var client = new HttpClient())
+            using (var clientHandler = new HttpClientHandler())
             {
                 string url = "https://localhost:7227/api/Empresa/GetOneEmpresa/" + cuit;
+                clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+                HttpClient client = new HttpClient(clientHandler);
                 client.DefaultRequestHeaders.Clear();
                 var response = client.GetAsync(url).Result;
                 var res = response.Content.ReadAsStringAsync().Result;
                 dynamic r = JObject.Parse(res);
-                name = r[2];
+                name = Convert.ToString(r["name"]);
             }
             return name;
         }
@@ -96,14 +100,16 @@ namespace DAL.Manager.Adapter
         public string GetRol(string id)
         {
             string rol = "";
-            using(var client = new HttpClient())
+            using(var clientHandler = new HttpClientHandler())
             {
                 string url = "https://localhost:7151/api/Rol/GetRol/" + id;
+                clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+                HttpClient client = new HttpClient(clientHandler);
                 client.DefaultRequestHeaders.Clear();
                 var response = client.GetAsync(url).Result;
                 var res = response.Content.ReadAsStringAsync().Result;
                 dynamic r = JObject.Parse(res);
-                rol = r[1];
+                rol = Convert.ToString(r["name"]);
             }
             return rol;
         }

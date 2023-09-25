@@ -38,3 +38,8 @@ R:\Agus\Facultad\TFI 5to\healthchain-back\ApiABMs\ApiABMs\obj\Debug\net6.0\ApiAB
 R:\Agus\Facultad\TFI 5to\healthchain-back\ApiABMs\ApiABMs\obj\Debug\net6.0\ApiABMs.genruntimeconfig.cache
 R:\Agus\Facultad\TFI 5to\healthchain-back\ApiABMs\ApiABMs\obj\Debug\net6.0\ref\ApiABMs.dll
 R:\Agus\Facultad\TFI 5to\healthchain-back\ApiABMs\ApiABMs\bin\Debug\net6.0\Newtonsoft.Json.dll
+R:\Agus\Facultad\TFI 5to\healthchain-back\ApiABMs\ApiABMs\obj\Debug\net6.0\staticwebassets\msbuild.ApiABMs.Microsoft.AspNetCore.StaticWebAssets.props
+R:\Agus\Facultad\TFI 5to\healthchain-back\ApiABMs\ApiABMs\obj\Debug\net6.0\staticwebassets\msbuild.build.ApiABMs.props
+R:\Agus\Facultad\TFI 5to\healthchain-back\ApiABMs\ApiABMs\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.ApiABMs.props
+R:\Agus\Facultad\TFI 5to\healthchain-back\ApiABMs\ApiABMs\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.ApiABMs.props
+R:\Agus\Facultad\TFI 5to\healthchain-back\ApiABMs\ApiABMs\obj\Debug\net6.0\staticwebassets.pack.json

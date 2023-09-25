@@ -2,7 +2,7 @@
 {
     public class Usuario
     {
-        public string Id { get; set; }
+        public string id { get; set; }
         public string user { get; set; }
         public string password { get; set; }
         public string name { get; set; }

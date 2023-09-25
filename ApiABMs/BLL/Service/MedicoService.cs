@@ -31,9 +31,8 @@ namespace BLL.Service
         {
             try
             {
-                Empresa empresa = EmpresaService.Current.GetOne(Convert.ToInt32(cuit));
                 List<Medico> lista = new List<Medico>();
-                lista = (List<Medico>)MedicoManager.Current.GetMedicosEmpresa(empresa.id_empresa);
+                lista = (List<Medico>)MedicoManager.Current.GetMedicosEmpresa(cuit);
                 return lista;
             }
             catch (Exception ex)

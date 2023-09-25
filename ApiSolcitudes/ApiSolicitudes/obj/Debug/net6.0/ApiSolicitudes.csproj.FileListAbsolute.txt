@@ -38,3 +38,8 @@ R:\Agus\Facultad\TFI 5to\healthchain-back\ApiSolcitudes\ApiSolicitudes\obj\Debug
 R:\Agus\Facultad\TFI 5to\healthchain-back\ApiSolcitudes\ApiSolicitudes\obj\Debug\net6.0\ApiSolicitudes.genruntimeconfig.cache
 R:\Agus\Facultad\TFI 5to\healthchain-back\ApiSolcitudes\ApiSolicitudes\obj\Debug\net6.0\ref\ApiSolicitudes.dll
 R:\Agus\Facultad\TFI 5to\healthchain-back\ApiSolcitudes\ApiSolicitudes\bin\Debug\net6.0\Newtonsoft.Json.dll
+R:\Agus\Facultad\TFI 5to\healthchain-back\ApiSolcitudes\ApiSolicitudes\obj\Debug\net6.0\staticwebassets\msbuild.ApiSolicitudes.Microsoft.AspNetCore.StaticWebAssets.props
+R:\Agus\Facultad\TFI 5to\healthchain-back\ApiSolcitudes\ApiSolicitudes\obj\Debug\net6.0\staticwebassets\msbuild.build.ApiSolicitudes.props
+R:\Agus\Facultad\TFI 5to\healthchain-back\ApiSolcitudes\ApiSolicitudes\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.ApiSolicitudes.props
+R:\Agus\Facultad\TFI 5to\healthchain-back\ApiSolcitudes\ApiSolicitudes\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.ApiSolicitudes.props
+R:\Agus\Facultad\TFI 5to\healthchain-back\ApiSolcitudes\ApiSolicitudes\obj\Debug\net6.0\staticwebassets.pack.json

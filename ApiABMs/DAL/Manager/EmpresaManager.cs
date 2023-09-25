@@ -64,7 +64,7 @@ namespace DAL.Manager
                 using (var dr = SqlHelper.ExecuteReader(SelectOneStatement, System.Data.CommandType.Text,
                     new SqlParameter[]
                     {
-                        new SqlParameter("@cuit_empresa", Convert.ToInt32(valores.First()))
+                        new SqlParameter("@cuit_empresa", valores.First())
                     }))
                 {
                     if (dr.Read())
@@ -95,7 +95,7 @@ namespace DAL.Manager
                 SqlHelper.ExecuteNonQuery(InsertStatement, System.Data.CommandType.Text, new SqlParameter[]
                 {
                     new SqlParameter("@id_empresa", Guid.Parse(entity.id_empresa)),
-                    new SqlParameter("@cuit_empresa", Convert.ToInt32(entity.cuit)),
+                    new SqlParameter("@cuit_empresa", entity.cuit),
                     new SqlParameter("@nombre_empresa", entity.name),
                     new SqlParameter("@direccion_empresa", entity.direccion),
                     new SqlParameter("@fecha_creacion", entity.fecha_creacion),

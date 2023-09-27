@@ -62,7 +62,7 @@ namespace ApiABMs.Controllers
             try
             {
                 List<Empresa> Empresa = new List<Empresa>();
-                Empresa = (List<Empresa>)EmpresaService.Current.GetAll();
+                Empresa = (List<Empresa>)EmpresaService.Current.GetAllEmpresasAsociadasMedico(username);
                 return Empresa;
             }
             catch (Exception ex)

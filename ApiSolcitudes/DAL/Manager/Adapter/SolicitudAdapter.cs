@@ -40,7 +40,7 @@ namespace DAL.Manager.Adapter
                 id_usuario = values[(int)Columns.id_usuario].ToString(),
                 tipo_Solicitud = Tipo_solicitudManager.Current.GetOne(criterios, valores),
                 Descripcion = values[(int)Columns.Descripcion].ToString(),
-                estado = values[(int)Columns.Estado].ToString(),
+                estado = SolicitudManager.Current.GetEstado(values[(int)Columns.Estado].ToString()),
                 fecha_creacion = DateTime.Parse(values[(int)Columns.fecha_creacion].ToString()),
                 fecha_modificacion = DateTime.Parse(values[(int)Columns.fecha_modificacion].ToString()),
                 user = GetNombreUser(values[(int)Columns.id_usuario].ToString()),
@@ -100,16 +100,18 @@ namespace DAL.Manager.Adapter
         public string GetRol(string id)
         {
             string rol = "";
-            using(var clientHandler = new HttpClientHandler())
-            {
-                string url = "https://localhost:7151/api/Rol/GetRol/" + id;
-                clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
-                HttpClient client = new HttpClient(clientHandler);
-                client.DefaultRequestHeaders.Clear();
-                var response = client.GetAsync(url).Result;
-                var res = response.Content.ReadAsStringAsync().Result;
-                dynamic r = JObject.Parse(res);
-                rol = Convert.ToString(r["name"]);
+            if(id != "") { 
+                using(var clientHandler = new HttpClientHandler())
+                {
+                    string url = "https://localhost:7151/api/Rol/GetRol/" + id;
+                    clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+                    HttpClient client = new HttpClient(clientHandler);
+                    client.DefaultRequestHeaders.Clear();
+                    var response = client.GetAsync(url).Result;
+                    var res = response.Content.ReadAsStringAsync().Result;
+                    dynamic r = JObject.Parse(res);
+                    rol = Convert.ToString(r["name"]);
+                }
             }
             return rol;
         }

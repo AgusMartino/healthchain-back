@@ -1,4 +1,5 @@
 ﻿using DAL.Interface;
+using DAL.Manager.Adapter;
 using DAL.Tools;
 using Domain.DOMAIN;
 using System;
@@ -44,6 +45,32 @@ namespace DAL.Manager
 
                 throw ex;
             }
+        }
+
+        public Rol GetRol(string id)
+        {
+            try
+            {
+                Rol rol = new Rol();
+                string statement = "Select * from Rol as r join usuario_rol as ur on ur.IdRol = r.Id_Rol where ur.IdUsuario = @id_usuario";
+                using (var dr = SqlHelper.ExecuteReader(statement, System.Data.CommandType.Text, new SqlParameter[] {
+                                                       new SqlParameter("@id_usuario", Guid.Parse(id))}))
+                {
+                    while (dr.Read())
+                    {
+                        object[] vs = new object[dr.FieldCount];
+                        dr.GetValues(vs);
+                        rol = RolAdapter.Current.adapt(vs);
+                    }
+                }
+                return rol;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            
         }
 
         public void delete(Usuario obj1, Rol obj2)

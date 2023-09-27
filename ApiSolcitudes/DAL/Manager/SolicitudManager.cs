@@ -198,6 +198,34 @@ namespace DAL.Manager
                 throw ex;
             }
         }
+
+        public string GetEstado(string id)
+        {
+            string estado = "";
+            string statement = "SELECT estado FROM [dbo].[Estado] WHERE id_estado = @id";
+            try
+            {
+                using (var dr = SqlHelper.ExecuteReader(statement, System.Data.CommandType.Text, new SqlParameter[]
+                {
+                    new SqlParameter("@id", int.Parse(id))
+                }))
+                {
+                    while (dr.Read())
+                    {
+                        object[] vs = new object[dr.FieldCount];
+                        dr.GetValues(vs);
+                        object v = vs.First();
+                        estado = v.ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return estado;
+
+        }
     }
 
 }

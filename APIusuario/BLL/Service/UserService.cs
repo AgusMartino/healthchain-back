@@ -29,10 +29,6 @@ namespace BLL.Service
                 usuario.id = Guid.NewGuid().ToString();
                 usuario.fecha_creacion = DateTime.Now;
                 usuario.fecha_modificacion = DateTime.Now;
-                if(usuario.cuit_empresa == "" || usuario.cuit_empresa == "null")
-                {
-                    usuario.cuit_empresa = null;
-                }
                 if (usuario.password != null)
                 {
                     usuario.password = EncrypService.EncryptPassword(usuario.password);

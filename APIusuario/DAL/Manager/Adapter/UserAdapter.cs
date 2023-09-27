@@ -29,8 +29,6 @@ namespace DAL.Manager.Adapter
 
         public Usuario adapt(object[] values)
         {
-            string[] criterios = { "id" };
-            string[] valores = { values[(int)Columns.tipo_usuario].ToString() };
             Usuario usuario = new Usuario
             {
                 id = values[(int)Columns.id_usuario].ToString(),
@@ -40,7 +38,7 @@ namespace DAL.Manager.Adapter
                 lastname = values[(int)Columns.apellido].ToString(),
                 user_type = values[(int)Columns.tipo_usuario].ToString(),
                 cuit_empresa = values[(int)Columns.cuit_empresa].ToString(),
-                rol = RolManager.Current.GetOne(criterios , valores ),
+                rol = RolUsuarioManager.Current.GetRol(values[(int)Columns.id_usuario].ToString()),
                 fecha_creacion = DateTime.Parse(values[(int)Columns.fecha_creacion].ToString()),
                 fecha_modificacion = DateTime.Parse(values[(int)Columns.fecha_modificacion].ToString())
             };

@@ -31,7 +31,26 @@ namespace BLL.Service
         {
             try
             {
+                if(usuario.rol.Id == "")
+                {
+                    usuario.rol = null;
+                }
                 RolUsuarioManager.Current.Join(usuario, usuario.rol);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        public Rol GetRol(string id_usuario)
+        {
+            try
+            {
+                Rol rol = new Rol();
+                rol = RolUsuarioManager.Current.GetRol(id_usuario);
+                return rol;
             }
             catch (Exception ex)
             {

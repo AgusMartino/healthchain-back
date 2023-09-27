@@ -76,12 +76,11 @@ namespace BLL.Service
             }
         }
 
-        public IEnumerable<Empresa> GetAllEmpresasAsociadasMedico(string username)
+        public IEnumerable<Empresa> GetAllEmpresasAsociadasMedico(string userid)
         {
             try
             {
                 List<Empresa> empresas = new List<Empresa>();
-                string userid = GetUserId(username);
                 empresas = (List<Empresa>)EmpresaManager.Current.GetAllEmpresasAsociadasMedico(userid);
                 return empresas;
             }
@@ -90,21 +89,6 @@ namespace BLL.Service
 
                 throw ex;
             }
-        }
-
-        private string GetUserId(string username)
-        {
-            string userId = "";
-            using (var client = new HttpClient())
-            {
-                string url = "https://localhost:7151/api/User/GetUser/" + username;
-                client.DefaultRequestHeaders.Clear();
-                var response = client.GetAsync(url).Result;
-                var res = response.Content.ReadAsStringAsync().Result;
-                dynamic r = JObject.Parse(res);
-                userId = r[0];
-            }
-            return userId;
         }
     }
 

@@ -138,9 +138,7 @@ namespace DAL.Manager
         {
             List<Empresa> list = new List<Empresa>();
             Empresa empresa = new Empresa();
-            string sql = "Select e.id_empresa, e.cuit_empresa, e.nombre_empresa, e.direccion_empresa, e.fecha_creacion, e.fecha_modificacion from Empresa as e"
-                         + "join medico_empresa as me on me.id_empresa = e.id_empresa"
-                         + "where me.id_usuario_medico = @usuario";
+            string sql = "Select e.id_empresa, e.cuit_empresa, e.nombre_empresa, e.direccion_empresa, e.fecha_creacion, e.fecha_modificacion from Empresa as e join medico_empresa as me on me.id_empresa = e.id_empresa where me.id_usuario_medico = @usuario";
             try
             {
                 using (var dr = SqlHelper.ExecuteReader(sql, System.Data.CommandType.Text, new SqlParameter[]

@@ -1,6 +1,7 @@
 ﻿using DAL.Interface;
 using DAL.Manager.Adapter;
 using DAL.Tools;
+using DAL.Tools.Service;
 using Domain.DOMAIN;
 using System.Data.SqlClient;
 
@@ -54,9 +55,9 @@ namespace DAL.Manager
 
         public Usuario GetUserByUser(string user)
         {
+            Usuario usuario = new Usuario();
             try
             {
-                Usuario usuario = new Usuario();
                 using (var dr = SqlHelper.ExecuteReader(SelectOneStatement, System.Data.CommandType.Text, new SqlParameter[] {
                                                        new SqlParameter("@usuario", user)}))
                 {
@@ -67,21 +68,22 @@ namespace DAL.Manager
                         usuario = UserAdapter.Current.adapt(vs);
                     }
                 }
-                return usuario;
+                string descripcion = "Se obtuvo la informacion del usuario con user: " + user;
+                BitacoraService.Current.AddBitacora("INFO", descripcion, "084757d9-cbf3-4098-9374-b9e6563dcfb3");
             }
             catch (Exception ex)
             {
-
-                throw ex;
+                BitacoraService.Current.AddBitacora("ERROR", ex.ToString(), "084757d9-cbf3-4098-9374-b9e6563dcfb3");
             }
+            return usuario;
 
         }
 
         public Usuario GetUser(string user)
         {
+            Usuario usuario = new Usuario();
             try
             {
-                Usuario usuario = new Usuario();
                 string sql = "SELECT * FROM [dbo].[Usuario] WHERE id_usuario = @usuario";
                 using (var dr = SqlHelper.ExecuteReader(sql, System.Data.CommandType.Text, new SqlParameter[] {
                                                        new SqlParameter("@usuario", Guid.Parse(user))}))
@@ -93,21 +95,22 @@ namespace DAL.Manager
                         usuario = UserAdapter.Current.adapt(vs);
                     }
                 }
-                return usuario;
+                string descripcion = "Se obtuvo la informacion del usuario con id " + user;
+                BitacoraService.Current.AddBitacora("INFO", descripcion, "084757d9-cbf3-4098-9374-b9e6563dcfb3");
             }
             catch (Exception ex)
             {
-
-                throw ex;
+                BitacoraService.Current.AddBitacora("ERROR", ex.ToString(), "084757d9-cbf3-4098-9374-b9e6563dcfb3");
             }
+            return usuario;
 
         }
 
         public Usuario LoginUserBo(string user, string password)
         {
+            Usuario usuario = new Usuario();
             try
             {
-                Usuario usuario = new Usuario();
                 string statement = "SELECT * FROM [dbo].[Usuario] WHERE usuario = @usuario and contraseña = @contraseña";
                 using (var dr = SqlHelper.ExecuteReader(statement, System.Data.CommandType.Text, new SqlParameter[] {
                                                        new SqlParameter("@Usuario", user),
@@ -120,14 +123,15 @@ namespace DAL.Manager
                         usuario = UserAdapter.Current.adapt(vs);
                     }
                 }
-                return usuario;
+                string descripcion = "Login del usuario " + user;
+                BitacoraService.Current.AddBitacora("INFO", descripcion, "084757d9-cbf3-4098-9374-b9e6563dcfb3");
             }
             catch (Exception ex)
             {
-
-                throw ex;
+                BitacoraService.Current.AddBitacora("ERROR", ex.ToString(), "084757d9-cbf3-4098-9374-b9e6563dcfb3");
             }
-            
+            return usuario;
+
         }
 
         public Usuario GetOne(string[] criterios, string[] valores)
@@ -156,21 +160,21 @@ namespace DAL.Manager
                     new SqlParameter("@fecha_creacion", entity.fecha_creacion),
                     new SqlParameter("@fecha_modificacion", entity.fecha_modificacion)
                 });
-
+                string descripcion = "Se genero el usuario" + entity.user;
+                BitacoraService.Current.AddBitacora("INFO", descripcion, entity.id);
             }
             catch (Exception ex)
             {
-                throw ex;
+                BitacoraService.Current.AddBitacora("ERROR", ex.ToString(), entity.id);
             }
         }
 
         public IEnumerable<Usuario> GetAll(string cuit_empresa)
         {
-
+            List<Usuario> usuarioList = new List<Usuario>();
             try
             {
                 Usuario usuario = new Usuario();
-                List<Usuario> usuarioList = new List<Usuario>();
                 string statement = "SELECT * FROM [dbo].[Usuario] WHERE cuit_empresa = @cuit_empresa and tipo_usuario = 1";
                 using (var dr = SqlHelper.ExecuteReader(statement, System.Data.CommandType.Text, new SqlParameter[] {
                                                        new SqlParameter("@cuit_empresa", cuit_empresa)}))
@@ -183,13 +187,14 @@ namespace DAL.Manager
                         usuarioList.Add(usuario);
                     }
                 }
-                return usuarioList;
+                string descripcion = "Se realizo un Get de todos los usuario de la empresa con cuit" + cuit_empresa.ToString();
+                BitacoraService.Current.AddBitacora("INFO", descripcion, "084757d9-cbf3-4098-9374-b9e6563dcfb3");
             }
             catch (Exception ex)
             {
-
-                throw ex;
+                BitacoraService.Current.AddBitacora("ERROR", ex.ToString(), "084757d9-cbf3-4098-9374-b9e6563dcfb3");
             }
+            return usuarioList;
         }
 
         public IEnumerable<Usuario> GetAll()
@@ -212,11 +217,12 @@ namespace DAL.Manager
                     new SqlParameter("@cuit_empresa", entity.cuit_empresa),
                     new SqlParameter("@fecha_modificacion", entity.fecha_modificacion)
                 });
+                string descripcion = "Se genero un update del usuario" + entity.user;
+                BitacoraService.Current.AddBitacora("INFO", descripcion, entity.id);
             }
             catch (Exception ex)
             {
-
-                throw ex;
+                BitacoraService.Current.AddBitacora("ERROR", ex.ToString(), entity.id);
             }
         }
     }

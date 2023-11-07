@@ -1,6 +1,7 @@
 ﻿using DAL.Interface;
 using DAL.Manager.Adapters;
 using DAL.Tools;
+using DAL.Tools.Service;
 using Domain.DOMAIN;
 using System;
 using System.Collections.Generic;
@@ -58,9 +59,9 @@ namespace DAL.Manager
         #endregion
         public Empresa GetOne(string[] criterios, string[] valores)
         {
+            Empresa empresa = new Empresa();
             try
             {
-                Empresa empresa = new Empresa();
                 using (var dr = SqlHelper.ExecuteReader(SelectOneStatement, System.Data.CommandType.Text,
                     new SqlParameter[]
                     {
@@ -74,13 +75,14 @@ namespace DAL.Manager
                         empresa = EmpresaAdapter.Current.adapt(values);
                     }
                 }
-                return empresa;
+                string descripcion = "Se obtuvo la informacion de la empresa con cuit:" + valores.First();
+                BitacoraService.Current.AddBitacora("INFO", descripcion, "084757d9-cbf3-4098-9374-b9e6563dcfb3");
             }
             catch (Exception ex)
             {
-
-                throw ex;
+                BitacoraService.Current.AddBitacora("ERROR", ex.ToString(), "084757d9-cbf3-4098-9374-b9e6563dcfb3");
             }
+            return empresa;
         }
 
         public void delete(Empresa entity)
@@ -102,10 +104,12 @@ namespace DAL.Manager
                     new SqlParameter("@fecha_modificacion", entity.fecha_modificacion)
                 });
 
+                string descripcion = "Se realizo el alta de la empresa con cuit:" + entity.cuit;
+                BitacoraService.Current.AddBitacora("INFO", descripcion, "084757d9-cbf3-4098-9374-b9e6563dcfb3");
             }
             catch (Exception ex)
             {
-                throw ex;
+                BitacoraService.Current.AddBitacora("ERROR", ex.ToString(), "084757d9-cbf3-4098-9374-b9e6563dcfb3");
             }
         }
 
@@ -125,11 +129,12 @@ namespace DAL.Manager
                         list.Add(empresa);
                     }
                 }
+                string descripcion = "Se obtuvo una lista de todas las empresas";
+                BitacoraService.Current.AddBitacora("INFO", descripcion, "084757d9-cbf3-4098-9374-b9e6563dcfb3");
             }
             catch (Exception ex)
             {
-
-                throw ex;
+                BitacoraService.Current.AddBitacora("ERROR", ex.ToString(), "084757d9-cbf3-4098-9374-b9e6563dcfb3");
             }
             return list;
         }
@@ -154,10 +159,12 @@ namespace DAL.Manager
                         list.Add(empresa);
                     }
                 }
+                string descripcion = "Se obtuvo una lista de todas las empresas relacionadas con el medico con id:" + userid;
+                BitacoraService.Current.AddBitacora("INFO", descripcion, "084757d9-cbf3-4098-9374-b9e6563dcfb3");
             }
             catch (Exception ex)
             {
-                throw ex;
+                BitacoraService.Current.AddBitacora("ERROR", ex.ToString(), "084757d9-cbf3-4098-9374-b9e6563dcfb3");
             }
             return list;
         }

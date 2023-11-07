@@ -1,5 +1,6 @@
 ﻿using DAL.Manager.Adapters;
 using DAL.Tools;
+using DAL.Tools.Service;
 using Domain.DOMAIN;
 using System;
 using System.Collections.Generic;
@@ -32,9 +33,9 @@ namespace DAL.Manager
 
         public IEnumerable<Medico> GetMedicosEmpresa(string cuitEmpresa)
         {
+            List<Medico> medicos = new List<Medico>();
             try
             {
-                List<Medico> medicos = new List<Medico>();
                 Medico medico = new Medico();
                 string sqlstatemen = "SELECT u.nombre, u.apellido, u.usuario, e.especialidad from medico_empresa as me join Empresa as empr on empr.id_empresa = me.id_empresa join usuario as u on u.id_usuario = me.id_usuario_medico join medico_especialidad as m on m.id_usuario = u.id_usuario join especialidades as e on e.id_especialidad = m.id_especialidad where empr.cuit_empresa = @empresa";
                 using (var dr = SqlHelper.ExecuteReader(sqlstatemen, System.Data.CommandType.Text, new SqlParameter[]
@@ -50,20 +51,21 @@ namespace DAL.Manager
                         medicos.Add(medico);
                     }
                 }
-                return medicos;
+                string descripcion = "Se obtuvo listado de todos los medicos relacionados con la empresa con cuit:" + cuitEmpresa;
+                BitacoraService.Current.AddBitacora("INFO", descripcion, "084757d9-cbf3-4098-9374-b9e6563dcfb3");
             }
             catch (Exception ex)
             {
-
-                throw ex;
+                BitacoraService.Current.AddBitacora("ERROR", ex.ToString(), "084757d9-cbf3-4098-9374-b9e6563dcfb3");
             }
+            return medicos;
         }
 
         public Medico GetMedico(string username)
         {
+            Medico medico = new Medico();
             try
             {
-                Medico medico = new Medico();
                 string sqlstatemen = "SELECT u.nombre, u.apellido, u.usuario, e.especialidad from usuario as u join medico_especialidad as m on m.id_usuario = u.id_usuario join especialidades as e on e.id_especialidad = m.id_especialidad where u.id_usuario = @usuario";
                 using (var dr = SqlHelper.ExecuteReader(sqlstatemen, System.Data.CommandType.Text, new SqlParameter[]
                 {
@@ -77,13 +79,14 @@ namespace DAL.Manager
                         medico = MedicoAdapter.Current.adapt(values);
                     }
                 }
-                return medico;
+                string descripcion = "Se obtuvo la informacion del medico con id:" + username;
+                BitacoraService.Current.AddBitacora("INFO", descripcion, "084757d9-cbf3-4098-9374-b9e6563dcfb3");
             }
             catch (Exception ex)
             {
-
-                throw ex;
+                BitacoraService.Current.AddBitacora("ERROR", ex.ToString(), "084757d9-cbf3-4098-9374-b9e6563dcfb3");
             }
+            return medico;
         }
     }
 

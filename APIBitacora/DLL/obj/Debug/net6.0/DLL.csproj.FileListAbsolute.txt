@@ -1,0 +1,15 @@
+R:\Agus\Facultad\TFI 5to\healthchain-back\APIBitacora\DLL\obj\Debug\net6.0\DLL.csproj.AssemblyReference.cache
+R:\Agus\Facultad\TFI 5to\healthchain-back\APIBitacora\DLL\obj\Debug\net6.0\DLL.GeneratedMSBuildEditorConfig.editorconfig
+R:\Agus\Facultad\TFI 5to\healthchain-back\APIBitacora\DLL\obj\Debug\net6.0\DLL.AssemblyInfoInputs.cache
+R:\Agus\Facultad\TFI 5to\healthchain-back\APIBitacora\DLL\obj\Debug\net6.0\DLL.AssemblyInfo.cs
+R:\Agus\Facultad\TFI 5to\healthchain-back\APIBitacora\DLL\obj\Debug\net6.0\DLL.csproj.CoreCompileInputs.cache
+R:\Agus\Facultad\TFI 5to\healthchain-back\APIBitacora\DLL\bin\Debug\net6.0\DLL.deps.json
+R:\Agus\Facultad\TFI 5to\healthchain-back\APIBitacora\DLL\bin\Debug\net6.0\DLL.dll
+R:\Agus\Facultad\TFI 5to\healthchain-back\APIBitacora\DLL\bin\Debug\net6.0\DLL.pdb
+R:\Agus\Facultad\TFI 5to\healthchain-back\APIBitacora\DLL\bin\Debug\net6.0\DOMAIN.dll
+R:\Agus\Facultad\TFI 5to\healthchain-back\APIBitacora\DLL\bin\Debug\net6.0\DOMAIN.pdb
+R:\Agus\Facultad\TFI 5to\healthchain-back\APIBitacora\DLL\obj\Debug\net6.0\DLL.csproj.CopyComplete
+R:\Agus\Facultad\TFI 5to\healthchain-back\APIBitacora\DLL\obj\Debug\net6.0\DLL.dll
+R:\Agus\Facultad\TFI 5to\healthchain-back\APIBitacora\DLL\obj\Debug\net6.0\refint\DLL.dll
+R:\Agus\Facultad\TFI 5to\healthchain-back\APIBitacora\DLL\obj\Debug\net6.0\DLL.pdb
+R:\Agus\Facultad\TFI 5to\healthchain-back\APIBitacora\DLL\obj\Debug\net6.0\ref\DLL.dll

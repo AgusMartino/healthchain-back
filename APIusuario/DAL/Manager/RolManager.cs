@@ -1,6 +1,7 @@
 ﻿using DAL.Interface;
 using DAL.Manager.Adapter;
 using DAL.Tools;
+using DAL.Tools.Service;
 using Domain.DOMAIN;
 using System;
 using System.Collections.Generic;
@@ -54,9 +55,9 @@ namespace DAL.Manager
 
         public Rol GetOne(string[] criterios, string[] valores)
         {
+            Rol rol = new Rol();
             try
             {
-                Rol rol = new Rol();
                 using (var dr = SqlHelper.ExecuteReader(SelectOneStatement, System.Data.CommandType.Text, 
                     new SqlParameter[]
                     { 
@@ -70,14 +71,15 @@ namespace DAL.Manager
                         rol = RolAdapter.Current.adapt(values);
                     }
                 }
-                return rol;
+                string descripcion = "Se obtuvo el rol con id:" + valores.First();
+                BitacoraService.Current.AddBitacora("INFO", descripcion, "084757d9-cbf3-4098-9374-b9e6563dcfb3");
             }
             catch (Exception ex)
             {
-
-                throw ex;
+                BitacoraService.Current.AddBitacora("ERROR", ex.ToString(), "084757d9-cbf3-4098-9374-b9e6563dcfb3");
             }
-            
+            return rol;
+
         }
 
         public void delete(Rol entity)
@@ -106,11 +108,12 @@ namespace DAL.Manager
                         list.Add(rol);
                     }
                 }
+                string descripcion = "Se obtuvo una lista completa de los roles";
+                BitacoraService.Current.AddBitacora("INFO", descripcion, "084757d9-cbf3-4098-9374-b9e6563dcfb3");
             }
             catch (Exception ex)
             {
-
-                throw ex;
+                BitacoraService.Current.AddBitacora("ERROR", ex.ToString(), "084757d9-cbf3-4098-9374-b9e6563dcfb3");
             }
             return list;
         }

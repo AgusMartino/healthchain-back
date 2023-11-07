@@ -1,6 +1,7 @@
 ﻿using DAL.Interface;
 using DAL.Manager.Adapter;
 using DAL.Tools;
+using DAL.Tools.Service;
 using Domain.DOMAIN;
 using System;
 using System.Collections.Generic;
@@ -44,9 +45,9 @@ namespace DAL.Manager
         #endregion
         public tipo_solicitud GetOne(string[] criterios, string[] valores)
         {
+            tipo_solicitud solicitud = new tipo_solicitud();
             try
             {
-                tipo_solicitud solicitud = new tipo_solicitud();
                 using (var dr = SqlHelper.ExecuteReader(SelectOneStatement, System.Data.CommandType.Text,
                    new SqlParameter[] { new SqlParameter("@id_tipo_solicitud", int.Parse(valores.First())) }))
                 {
@@ -57,14 +58,16 @@ namespace DAL.Manager
 
                         solicitud = Tipo_SolicitudaAdapter.Current.adapt(values);
                     }
-                    return solicitud;
+                    
                 }
+                string descripcion = "Se obtuvo obtuvo el tipo de solicitud con id:" + valores.First();
+                BitacoraService.Current.AddBitacora("INFO", descripcion, "084757d9-cbf3-4098-9374-b9e6563dcfb3");
             }
             catch (Exception ex)
             {
-
-                throw ex;
+                BitacoraService.Current.AddBitacora("ERROR", ex.ToString(), "084757d9-cbf3-4098-9374-b9e6563dcfb3");
             }
+            return solicitud;
         }
 
         public void delete(tipo_solicitud entity)
@@ -93,10 +96,12 @@ namespace DAL.Manager
                         list.Add(solicitud);
                     }
                 }
+                string descripcion = "Se obtuvo una lista de todos los tipos de solicitud";
+                BitacoraService.Current.AddBitacora("INFO", descripcion, "084757d9-cbf3-4098-9374-b9e6563dcfb3");
             }
             catch (Exception ex)
             {
-                throw ex;
+                BitacoraService.Current.AddBitacora("ERROR", ex.ToString(), "084757d9-cbf3-4098-9374-b9e6563dcfb3");
             }
             return list;
         }
@@ -105,6 +110,5 @@ namespace DAL.Manager
         {
             throw new NotImplementedException();
         }
-        //Implent here the initialization of your singleton
     }
 }

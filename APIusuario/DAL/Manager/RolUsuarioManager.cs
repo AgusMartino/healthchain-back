@@ -1,6 +1,7 @@
 ﻿using DAL.Interface;
 using DAL.Manager.Adapter;
 using DAL.Tools;
+using DAL.Tools.Service;
 using Domain.DOMAIN;
 using System;
 using System.Collections.Generic;
@@ -39,19 +40,20 @@ namespace DAL.Manager
                     new SqlParameter("@IdUsuario", Guid.Parse(obj1.id)),
                     new SqlParameter("@IdRol", Convert.ToInt32(obj2.Id))
                 });
+                string descripcion = "Se le asigno el rol con id" + obj2.Id + "al usuario con id:" + obj1.id;
+                BitacoraService.Current.AddBitacora("INFO", descripcion, obj1.id);
             }
             catch (Exception ex)
             {
-
-                throw ex;
+                BitacoraService.Current.AddBitacora("ERROR", ex.ToString(), obj1.id);
             }
         }
 
         public Rol GetRol(string id)
         {
+            Rol rol = new Rol();
             try
             {
-                Rol rol = new Rol();
                 string statement = "Select * from Rol as r join usuario_rol as ur on ur.IdRol = r.Id_Rol where ur.IdUsuario = @id_usuario";
                 using (var dr = SqlHelper.ExecuteReader(statement, System.Data.CommandType.Text, new SqlParameter[] {
                                                        new SqlParameter("@id_usuario", Guid.Parse(id))}))
@@ -63,14 +65,15 @@ namespace DAL.Manager
                         rol = RolAdapter.Current.adapt(vs);
                     }
                 }
-                return rol;
+                string descripcion = "se obtuvo el rol con id:" + id;
+                BitacoraService.Current.AddBitacora("INFO", descripcion, "084757d9-cbf3-4098-9374-b9e6563dcfb3");
             }
             catch (Exception ex)
             {
-
-                throw ex;
+                BitacoraService.Current.AddBitacora("ERROR", ex.ToString(), "084757d9-cbf3-4098-9374-b9e6563dcfb3");
             }
-            
+            return rol;
+
         }
 
         public void delete(Usuario obj1, Rol obj2)
@@ -79,11 +82,12 @@ namespace DAL.Manager
             try
             {
                 SqlHelper.ExecuteNonQuery(statement, System.Data.CommandType.Text, new SqlParameter("@IdUsuario", Guid.Parse(obj1.id)));
+                string descripcion = "Se elimino la relacion entre el usuario con id:" + obj1.id + "con el rol con id:" + obj2.Id;
+                BitacoraService.Current.AddBitacora("INFO", descripcion, "084757d9-cbf3-4098-9374-b9e6563dcfb3");
             }
             catch (Exception ex)
             {
-
-                throw ex;
+                BitacoraService.Current.AddBitacora("ERROR", ex.ToString(), "084757d9-cbf3-4098-9374-b9e6563dcfb3");
             }
         }
 

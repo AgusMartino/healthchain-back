@@ -1,6 +1,7 @@
 ﻿using DAL.Interface;
 using DAL.Manager.Adapter;
 using DAL.Tools;
+using DAL.Tools.Service;
 using Domain.DOMAIN;
 using System;
 using System.Collections.Generic;
@@ -59,6 +60,7 @@ namespace DAL.Manager
         #endregion
         public Solicitud GetOne(string[] criterios, string[] valores)
         {
+            Solicitud solicitud = new Solicitud();
             try
             {
                 string where = "";
@@ -73,16 +75,17 @@ namespace DAL.Manager
                     {
                         object[] values = new object[dr.FieldCount];
                         dr.GetValues(values);
-                        return SolicitudAdapter.Current.adapt(values);
+                        solicitud = SolicitudAdapter.Current.adapt(values);
                     }
                 }
+                string descripcion = "Se obtuvo la solicitud con los criterios:" + where;
+                BitacoraService.Current.AddBitacora("INFO", descripcion, "084757d9-cbf3-4098-9374-b9e6563dcfb3");
             }
             catch (Exception ex)
             {
-
-                throw ex;
+                BitacoraService.Current.AddBitacora("ERROR", ex.ToString(), "084757d9-cbf3-4098-9374-b9e6563dcfb3");
             }
-            throw new NotImplementedException();
+            return solicitud;
         }
 
         public void delete(Solicitud entity)
@@ -94,7 +97,6 @@ namespace DAL.Manager
         {
             try
             {
-                
                 SqlHelper.ExecuteNonQuery(InsertStatement, System.Data.CommandType.Text, new SqlParameter[]
                 {
                     new SqlParameter("@id_solicitud", Guid.Parse(entity.id_solicitud)),
@@ -107,11 +109,12 @@ namespace DAL.Manager
                     new SqlParameter("@fecha_modificacion", entity.fecha_modificacion),
                     new SqlParameter("@id_Rol_solicitado", entity.Rolseleccionado)
                 });
-
+                string descripcion = "Se creo la solicitud con id:" + entity.id_solicitud;
+                BitacoraService.Current.AddBitacora("INFO", descripcion, entity.id_usuario);
             }
             catch (Exception ex)
             {
-                throw ex;
+                BitacoraService.Current.AddBitacora("ERROR", ex.ToString(), entity.id_usuario);
             }
         }
 
@@ -140,10 +143,12 @@ namespace DAL.Manager
                         list.Add(solicitud);
                     }
                 }
+                string descripcion = "Se Obtuvo el listado de solicitudes de la empresa con cuit:" + cuit_empresa + "y con el tipo de solicitud id:" + id_tipo_solicitud.ToString();
+                BitacoraService.Current.AddBitacora("INFO", descripcion, "084757d9-cbf3-4098-9374-b9e6563dcfb3");
             }
             catch (Exception ex)
             {
-                throw ex;
+                BitacoraService.Current.AddBitacora("ERROR", ex.ToString(), "084757d9-cbf3-4098-9374-b9e6563dcfb3");
             }
             return list;
         }
@@ -168,10 +173,12 @@ namespace DAL.Manager
                         list.Add(solicitud);
                     }
                 }
+                string descripcion = "Se obtuvo una lista de las solicitudes realizadas por el usuario con id:" + id_user;
+                BitacoraService.Current.AddBitacora("INFO", descripcion, "084757d9-cbf3-4098-9374-b9e6563dcfb3");
             }
             catch (Exception ex)
             {
-                throw ex;
+                BitacoraService.Current.AddBitacora("ERROR", ex.ToString(), "084757d9-cbf3-4098-9374-b9e6563dcfb3");
             }
             return list;
         }
@@ -185,17 +192,19 @@ namespace DAL.Manager
                 SqlHelper.ExecuteNonQuery(UpdateStatement, System.Data.CommandType.Text, new SqlParameter[]
                 {
                     new SqlParameter("@cuit_empresa", entity.cuit_empresa),
-                    new SqlParameter("@id_usuario", entity.id_usuario),
+                    new SqlParameter("@id_usuario", Guid.Parse(entity.id_usuario)),
                     new SqlParameter("@id_tipo_solicitud", entity.tipo_Solicitud.id),
                     new SqlParameter("@Descripcion", entity.Descripcion),
                     new SqlParameter("@Estado", Convert.ToInt32(entity.estado)),
                     new SqlParameter("@fecha_modificacion", entity.fecha_modificacion)
                 });
 
+                string descripcion = "Se actualizo la informacion de la solicitud con id:" + entity.id_solicitud;
+                BitacoraService.Current.AddBitacora("INFO", descripcion, "084757d9-cbf3-4098-9374-b9e6563dcfb3");
             }
             catch (Exception ex)
             {
-                throw ex;
+                BitacoraService.Current.AddBitacora("ERROR", ex.ToString(), "084757d9-cbf3-4098-9374-b9e6563dcfb3");
             }
         }
 
@@ -218,10 +227,12 @@ namespace DAL.Manager
                         estado = v.ToString();
                     }
                 }
+                string descripcion = "Se obtuvo el estado con id:" + id;
+                BitacoraService.Current.AddBitacora("INFO", descripcion, "084757d9-cbf3-4098-9374-b9e6563dcfb3");
             }
             catch (Exception ex)
             {
-                throw ex;
+                BitacoraService.Current.AddBitacora("ERROR", ex.ToString(), "084757d9-cbf3-4098-9374-b9e6563dcfb3");
             }
             return estado;
 

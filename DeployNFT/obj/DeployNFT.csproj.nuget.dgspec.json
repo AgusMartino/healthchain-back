@@ -1,0 +1,80 @@
+{
+  "format": 1,
+  "restore": {
+    "R:\\Agus\\Facultad\\TFI 5to\\healthchain-back\\DeployNFT\\DeployNFT.csproj": {}
+  },
+  "projects": {
+    "R:\\Agus\\Facultad\\TFI 5to\\healthchain-back\\DeployNFT\\DeployNFT.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "R:\\Agus\\Facultad\\TFI 5to\\healthchain-back\\DeployNFT\\DeployNFT.csproj",
+        "projectName": "DeployNFT",
+        "projectPath": "R:\\Agus\\Facultad\\TFI 5to\\healthchain-back\\DeployNFT\\DeployNFT.csproj",
+        "packagesPath": "C:\\Users\\Agus\\.nuget\\packages\\",
+        "outputPath": "R:\\Agus\\Facultad\\TFI 5to\\healthchain-back\\DeployNFT\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Agus\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Nethereum.Accounts": {
+              "target": "Package",
+              "version": "[4.17.1, )"
+            },
+            "Nethereum.Contracts": {
+              "target": "Package",
+              "version": "[4.17.1, )"
+            },
+            "Nethereum.Web3": {
+              "target": "Package",
+              "version": "[4.17.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

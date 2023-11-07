@@ -752,6 +752,7 @@
         "dependencies": {
           "DAL": "1.0.0",
           "Domain": "1.0.0",
+          "Newtonsoft.Json": "5.0.4",
           "System.Data.SqlClient": "4.8.5"
         },
         "compile": {
@@ -767,6 +768,7 @@
         "dependencies": {
           "Domain": "1.0.0",
           "Microsoft.Extensions.Configuration.Abstractions": "7.0.0",
+          "Newtonsoft.Json": "5.0.4",
           "System.Configuration.ConfigurationManager": "7.0.0",
           "System.Data.SqlClient": "4.8.5"
         },

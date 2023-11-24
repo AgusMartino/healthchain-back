@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using System.Net.Http;
+using DAL.Tools.Service;
 
 namespace BLL.Service
 {
@@ -32,19 +33,18 @@ namespace BLL.Service
 
         public Solicitud GetOne(string cuit, Guid usuario)
         {
+            Solicitud solicitud = new Solicitud();
             try
             {
                 string[] criterios = { "cuit_empresa", "id_usuario" };
                 string[] valores = { cuit.ToString(), usuario.ToString() };
-                Solicitud solicitud = new Solicitud();
                 solicitud = SolicitudManager.Current.GetOne(criterios, valores);
-                return solicitud;
             }
             catch (Exception ex)
             {
-
-                throw ex;
+                BitacoraService.Current.AddBitacora("ERROR", ex.Message.ToString(), "084757d9-cbf3-4098-9374-b9e6563dcfb3");
             }
+            return solicitud;
         }
 
         public void Add(Solicitud solicitud)
@@ -58,8 +58,7 @@ namespace BLL.Service
             }
             catch (Exception ex)
             {
-
-                throw ex;
+                BitacoraService.Current.AddBitacora("ERROR", ex.Message.ToString(), "084757d9-cbf3-4098-9374-b9e6563dcfb3");
             }
             
         }

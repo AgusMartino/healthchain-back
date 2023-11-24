@@ -18,8 +18,7 @@ namespace APIBlockChain.Controllers
             }
             catch (Exception ex)
             {
-                return NotFound();
-                throw ex;
+                return NotFound(ex);
             }
         }
 
@@ -33,8 +32,7 @@ namespace APIBlockChain.Controllers
             }
             catch (Exception ex)
             {
-                return NotFound();
-                throw ex;
+                return NotFound(ex);
             }
         }
     }

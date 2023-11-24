@@ -435,6 +435,8 @@
       "System.Security.Principal.Windows/4.7.0": {},
       "BLL/1.0.0": {
         "dependencies": {
+          "DAL": "1.0.0",
+          "DOMAIN": "1.0.0",
           "Nethereum.HdWallet": "4.17.1",
           "Nethereum.Web3": "4.17.1",
           "System.Data.SqlClient": "4.8.5"
@@ -445,12 +447,23 @@
       },
       "DAL/1.0.0": {
         "dependencies": {
+          "DOMAIN": "1.0.0",
           "Nethereum.HdWallet": "4.17.1",
           "Nethereum.Web3": "4.17.1",
           "System.Data.SqlClient": "4.8.5"
         },
         "runtime": {
           "DAL.dll": {}
+        }
+      },
+      "DOMAIN/1.0.0": {
+        "dependencies": {
+          "Nethereum.HdWallet": "4.17.1",
+          "Nethereum.Web3": "4.17.1",
+          "System.Data.SqlClient": "4.8.5"
+        },
+        "runtime": {
+          "DOMAIN.dll": {}
         }
       }
     }
@@ -740,6 +753,11 @@
       "sha512": ""
     },
     "DAL/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "DOMAIN/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

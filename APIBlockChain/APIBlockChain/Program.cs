@@ -1,6 +1,7 @@
 using System.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using DAL.Tools;
+using DAL.Managers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +17,7 @@ builder.Services.AddCors(options =>
 SqlHelper.conString = builder.Configuration.GetConnectionString("dbHealthChain");
 NetConnection.net = builder.Configuration.GetConnectionString("testnet");
 NetConnection.chainId = builder.Configuration.GetConnectionString("chainId");
+NFTManager.contractAddress = builder.Configuration.GetConnectionString("contractAddress");
 
 builder.Configuration.AddJsonFile("appsettings.json",
         optional: true,

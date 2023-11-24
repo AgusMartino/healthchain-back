@@ -1,4 +1,5 @@
 ﻿using DAL.Manager;
+using DAL.Tools.Service;
 using Domain.DOMAIN;
 using System;
 using System.Collections.Generic;
@@ -29,36 +30,34 @@ namespace BLL.Service
 
         public List<Rol> GetRols()
         {
+            List<Rol> rols = new List<Rol>();
             try
             {
-                List<Rol> rols = new List<Rol>();
-                rols = (List<Rol>)RolManager.Current.GetAll();
-                return rols;
+                rols = (List<Rol>)RolManager.Current.GetAll(); 
             }
             catch (Exception ex)
             {
-
-                throw ex;
+                BitacoraService.Current.AddBitacora("ERROR", ex.Message.ToString(), "084757d9-cbf3-4098-9374-b9e6563dcfb3");
             }
-            
+            return rols;
+
 
         }
 
         public Rol GetRol(int id)
         {
+            Rol rol = new Rol();
             try
             {
-                Rol rol = new Rol();
                 string[] criterios = { "id" };
                 string[] valores = { id.ToString() };
                 rol = RolManager.Current.GetOne(criterios, valores);
-                return rol;
             }
             catch (Exception ex)
             {
-
-                throw;
+                BitacoraService.Current.AddBitacora("ERROR", ex.Message.ToString(), "084757d9-cbf3-4098-9374-b9e6563dcfb3");
             }
+            return rol;
         }
 
     }

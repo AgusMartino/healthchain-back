@@ -62,3 +62,5 @@ R:\Agus\Facultad\TFI 5to\healthchain-back\APIBlockChain\APIBlockChain\obj\Debug\
 R:\Agus\Facultad\TFI 5to\healthchain-back\APIBlockChain\APIBlockChain\obj\Debug\net6.0\APIBlockChain.pdb
 R:\Agus\Facultad\TFI 5to\healthchain-back\APIBlockChain\APIBlockChain\obj\Debug\net6.0\APIBlockChain.genruntimeconfig.cache
 R:\Agus\Facultad\TFI 5to\healthchain-back\APIBlockChain\APIBlockChain\obj\Debug\net6.0\ref\APIBlockChain.dll
+R:\Agus\Facultad\TFI 5to\healthchain-back\APIBlockChain\APIBlockChain\bin\Debug\net6.0\DOMAIN.dll
+R:\Agus\Facultad\TFI 5to\healthchain-back\APIBlockChain\APIBlockChain\bin\Debug\net6.0\DOMAIN.pdb

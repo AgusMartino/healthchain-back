@@ -8,6 +8,8 @@
     ".NETCoreApp,Version=v6.0": {
       "BLL/1.0.0": {
         "dependencies": {
+          "DAL": "1.0.0",
+          "DOMAIN": "1.0.0",
           "Nethereum.HdWallet": "4.17.1",
           "Nethereum.Web3": "4.17.1",
           "System.Data.SqlClient": "4.8.5"
@@ -389,7 +391,28 @@
           "System.Security.Principal.Windows": "4.7.0"
         }
       },
-      "System.Security.Principal.Windows/4.7.0": {}
+      "System.Security.Principal.Windows/4.7.0": {},
+      "DAL/1.0.0": {
+        "dependencies": {
+          "DOMAIN": "1.0.0",
+          "Nethereum.HdWallet": "4.17.1",
+          "Nethereum.Web3": "4.17.1",
+          "System.Data.SqlClient": "4.8.5"
+        },
+        "runtime": {
+          "DAL.dll": {}
+        }
+      },
+      "DOMAIN/1.0.0": {
+        "dependencies": {
+          "Nethereum.HdWallet": "4.17.1",
+          "Nethereum.Web3": "4.17.1",
+          "System.Data.SqlClient": "4.8.5"
+        },
+        "runtime": {
+          "DOMAIN.dll": {}
+        }
+      }
     }
   },
   "libraries": {
@@ -628,6 +651,16 @@
       "sha512": "sha512-ojD0PX0XhneCsUbAZVKdb7h/70vyYMDYs85lwEI+LngEONe/17A0cFaRFqZU+sOEidcVswYWikYOQ9PPfjlbtQ==",
       "path": "system.security.principal.windows/4.7.0",
       "hashPath": "system.security.principal.windows.4.7.0.nupkg.sha512"
+    },
+    "DAL/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "DOMAIN/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     }
   }
 }

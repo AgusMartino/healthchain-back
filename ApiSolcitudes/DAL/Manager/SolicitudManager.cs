@@ -83,7 +83,7 @@ namespace DAL.Manager
             }
             catch (Exception ex)
             {
-                BitacoraService.Current.AddBitacora("ERROR", ex.ToString(), "084757d9-cbf3-4098-9374-b9e6563dcfb3");
+                BitacoraService.Current.AddBitacora("ERROR", ex.Message.ToString(), "084757d9-cbf3-4098-9374-b9e6563dcfb3");
             }
             return solicitud;
         }
@@ -114,7 +114,7 @@ namespace DAL.Manager
             }
             catch (Exception ex)
             {
-                BitacoraService.Current.AddBitacora("ERROR", ex.ToString(), entity.id_usuario);
+                BitacoraService.Current.AddBitacora("ERROR", ex.Message.ToString(), "084757d9-cbf3-4098-9374-b9e6563dcfb3");
             }
         }
 
@@ -148,7 +148,7 @@ namespace DAL.Manager
             }
             catch (Exception ex)
             {
-                BitacoraService.Current.AddBitacora("ERROR", ex.ToString(), "084757d9-cbf3-4098-9374-b9e6563dcfb3");
+                BitacoraService.Current.AddBitacora("ERROR", ex.Message.ToString(), "084757d9-cbf3-4098-9374-b9e6563dcfb3");
             }
             return list;
         }
@@ -178,7 +178,7 @@ namespace DAL.Manager
             }
             catch (Exception ex)
             {
-                BitacoraService.Current.AddBitacora("ERROR", ex.ToString(), "084757d9-cbf3-4098-9374-b9e6563dcfb3");
+                BitacoraService.Current.AddBitacora("ERROR", ex.Message.ToString(), "084757d9-cbf3-4098-9374-b9e6563dcfb3");
             }
             return list;
         }
@@ -204,7 +204,7 @@ namespace DAL.Manager
             }
             catch (Exception ex)
             {
-                BitacoraService.Current.AddBitacora("ERROR", ex.ToString(), "084757d9-cbf3-4098-9374-b9e6563dcfb3");
+                BitacoraService.Current.AddBitacora("ERROR", ex.Message.ToString(), "084757d9-cbf3-4098-9374-b9e6563dcfb3");
             }
         }
 
@@ -232,7 +232,7 @@ namespace DAL.Manager
             }
             catch (Exception ex)
             {
-                BitacoraService.Current.AddBitacora("ERROR", ex.ToString(), "084757d9-cbf3-4098-9374-b9e6563dcfb3");
+                BitacoraService.Current.AddBitacora("ERROR", ex.Message.ToString(), "084757d9-cbf3-4098-9374-b9e6563dcfb3");
             }
             return estado;
 

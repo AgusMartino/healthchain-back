@@ -10,3 +10,8 @@ R:\Agus\Facultad\TFI 5to\healthchain-back\APIBlockChain\BLL\obj\Debug\net6.0\BLL
 R:\Agus\Facultad\TFI 5to\healthchain-back\APIBlockChain\BLL\obj\Debug\net6.0\refint\BLL.dll
 R:\Agus\Facultad\TFI 5to\healthchain-back\APIBlockChain\BLL\obj\Debug\net6.0\BLL.pdb
 R:\Agus\Facultad\TFI 5to\healthchain-back\APIBlockChain\BLL\obj\Debug\net6.0\ref\BLL.dll
+R:\Agus\Facultad\TFI 5to\healthchain-back\APIBlockChain\BLL\bin\Debug\net6.0\DAL.dll
+R:\Agus\Facultad\TFI 5to\healthchain-back\APIBlockChain\BLL\bin\Debug\net6.0\DOMAIN.dll
+R:\Agus\Facultad\TFI 5to\healthchain-back\APIBlockChain\BLL\bin\Debug\net6.0\DAL.pdb
+R:\Agus\Facultad\TFI 5to\healthchain-back\APIBlockChain\BLL\bin\Debug\net6.0\DOMAIN.pdb
+R:\Agus\Facultad\TFI 5to\healthchain-back\APIBlockChain\BLL\obj\Debug\net6.0\BLL.csproj.CopyComplete

@@ -1,82 +1,127 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using BLL.Services;
+using DOMAIN.DomainRequest;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace APIBlockChain.Controllers
 {
+    [ApiController]
+    [Route("api/[controller]/[action]")]
     public class NFTController : Controller
     {
-        // GET: NFTController
-        public ActionResult Index()
-        {
-            return View();
-        }
-
-        // GET: NFTController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: NFTController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: NFTController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        [HttpPost(Name = "AddNFT")]
+        public async Task<ActionResult> AddNFT(NftRequest nftRequest)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                NFTService.Current.AddNFT(nftRequest);
+                return Ok();
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                return NotFound(ex);
             }
         }
 
-        // GET: NFTController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: NFTController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        [HttpGet("{tokenid}", Name = "getNFT")]
+        public async Task<ActionResult<NftRequest>> getNFT(string tokenid)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                NftRequest nft = new NftRequest();
+                nft = NFTService.Current.GetNFT(tokenid);
+                return nft;
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                return NotFound(ex);
             }
         }
 
-        // GET: NFTController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: NFTController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        [HttpGet("{cuit}", Name = "GetNFTMarketplace")]
+        public async Task<ActionResult<List<NftRequest>>> GetNFTMarketplace(string cuit)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                List<NftRequest> nft = new List<NftRequest>();
+                nft = (List<NftRequest>)NFTService.Current.GetNFTMarketplace(cuit);
+                return nft;
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                return NotFound(ex);
+            }
+        }
+
+        [HttpGet("{id_user}",Name = "GetNFTCompany")]
+        public async Task<ActionResult<List<NftRequest>>> GetNFTCompany(string id_user)
+        {
+            try
+            {
+                List<NftRequest> nft = new List<NftRequest>();
+                nft = (List<NftRequest>)NFTService.Current.GetNFTCompany(id_user);
+                return nft;
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex);
+            }
+        }
+
+        [HttpGet("{id_user}",Name = "GetNFTUser")]
+        public async Task<ActionResult<List<NftRequest>>> GetNFTUser(string id_user)
+        {
+            try
+            {
+                List<NftRequest> nft = new List<NftRequest>();
+                nft = (List<NftRequest>)NFTService.Current.GetNFTUser(id_user);
+                return nft;
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex);
+            }
+        }
+
+        [HttpPost(Name = "SellNFT")]
+        public async Task<ActionResult> SellNFT(NftRequest nftRequest)
+        {
+            try
+            {
+                NFTService.Current.SellNFT(nftRequest);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex);
+            }
+        }
+
+        [HttpPost(Name = "TransaferNFT")]
+        public async Task<ActionResult> TransaferNFT(NftRequest nftRequest)
+        {
+            try
+            {
+                NFTService.Current.TransferNFT(nftRequest);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex);
+            }
+        }
+
+        [HttpPost(Name = "TransaferNFTWithETH")]
+        public async Task<ActionResult> TransaferNFTWithETH(NftRequest nftRequest)
+        {
+            try
+            {
+                NFTService.Current.TranferNFTWithETH(nftRequest);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex);
             }
         }
     }

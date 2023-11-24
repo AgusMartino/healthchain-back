@@ -5,44 +5,53 @@ using Nethereum.Web3.Accounts;
 using SmartContract.Contracts.HealthChain;
 using SmartContract.Contracts.HealthChain.ContractDefinition;
 using System.Net;
+using System.Numerics;
+using Newtonsoft.Json.Linq;
+using System.Text.Json.Nodes;
+using Nethereum.Contracts.Standards.ERC1155.ContractDefinition;
+using System.Security.Cryptography;
+using Nethereum.Signer;
+using Org.BouncyCastle.Utilities.Net;
 
-
-Console.WriteLine("Hello, World!");
-var privateKey = "0x6223dda46390d86ed29a31b2cfc4ee2a8451c6d90b77cda1879a982a56ab809f";
-var chainid = 1337;
-var account = new Account(privateKey, chainid);
-var web3 = new Web3(account, "http://127.0.0.1:7545");
-
- Console.WriteLine(account.Address.ToString());
-
-web3.Eth.TransactionManager.UseLegacyAsDefault = true;
-
-var deploymentMessage = new HealthChainDeployment();
-
-var deploymentHandler = web3.Eth.GetContractDeploymentHandler<HealthChainDeployment>();
-
-var gas = new HexBigInteger(2000000);  // Establece un límite de gas adecuado para el despliegue del contrato
-deploymentMessage.Gas = gas;
-
-var transactionHash = await deploymentHandler.SendRequestAsync(deploymentMessage);
-
-// Esperar a que la transacción se mine
-var receipt = await web3.Eth.Transactions.GetTransactionReceipt.SendRequestAsync(transactionHash);
-
-// Verificar si la transacción se ha minado y el contrato se ha desplegado
-if (receipt.Status.Value == 1) // 1 significa éxito en Ethereum
+try
 {
-    var contractAddress = receipt.ContractAddress;
-    Console.WriteLine("Deployed Contract address is: " + contractAddress);
+    Console.WriteLine("Hello, World!");
+    /*
+    var privateKey = "";
+    using (var rng = RandomNumberGenerator.Create())
+    {
+        var privateKeyBytes = new byte[32];
+        rng.GetBytes(privateKeyBytes);
+
+        privateKey = "0x" + BitConverter.ToString(privateKeyBytes).Replace("-", "").ToLower();
+    }
+    Console.WriteLine(privateKey);
+    var _chainId = 5; //Nethereum test chain, chainId
+    var account = new Account(privateKey, _chainId);
+    Console.WriteLine(account.Address);*/
+
+
+    var privateKey = "fdc83fd884ae517f4772c462f794f254f2c499430e265ca724310ecd99b39f62";
+    var chainid = 5;
+    var account = new Account(privateKey, chainid);
+    var web3 = new Web3(account, "https://goerli.infura.io/v3/bdefe16b41da472991a8439fc5398b5d");
+    var contractAddress = "0x2Ec565612a9dCfD95fB7984bf7f39F9eD3550455"; // Dirección del contrato ERC-721
+    var tokenIdToMint = 123456; // ID del NFT que deseas crear
+    var toAddress = "0x7d1D9Cd8Bc9420e0FD06067869874C53aa2a70ED"; // Dirección a la que se enviará el nuevo NFT
+
+    var mintNFTABI = @"function mintNFT(address to, uint256 tokenId) public";
+
+    var contract = web3.Eth.GetContract(mintNFTABI, contractAddress);
+
+    var mintFunction = contract.GetFunction("mintNFT");
+
+    var transactionHash = await mintFunction.SendTransactionAsync(account.Address, gas: new HexBigInteger(200000), value: new HexBigInteger(0),
+                                               functionInput: new object[] { toAddress, tokenIdToMint });
+
+    Console.WriteLine($"Transacción enviada. Hash: {transactionHash}");
 }
-else
+catch (Exception ex)
 {
-    Console.WriteLine("El despliegue del contrato ha fallado.");
+    Console.WriteLine("Error: " + ex.Message);
 }
 
-
-
-//HealthChainDeployment healthChainDeployment = new HealthChainDeployment();
-//var respose = await HealthChainService.DeployContractAndWaitForReceiptAsync(web3, healthChainDeployment);
-
-//Console.WriteLine(respose.ContractAddress.ToString());

@@ -30,26 +30,26 @@ namespace DAL.Tools.Service
 
 		public void AddBitacora(string type, string description, string id_usuario)
 		{
-			try
-			{
-				using (var clientHandler = new HttpClientHandler())
-				{
-					string url = "https://localhost:7182/api/Bitacora/AddBitacora";
-					string parameter = "{'id_usuario': '"+id_usuario+"', 'name': '', 'lastname': '', 'description': '"+description+ "', 'type': '"+type+ "', 'creation_date': ''}";
-					dynamic json = JObject.Parse(parameter);
-					var httpContent = new StringContent(json.ToString(), Encoding.UTF8, "application/json");
-					HttpClient client = new HttpClient(clientHandler);
-					client.DefaultRequestHeaders.Clear();
-					var respose2 = client.PostAsync(url, httpContent).Result;
-					dynamic response = JObject.Parse(respose2.ToString());
-				}
-			}
-			catch (Exception ex)
-			{
-				throw ex;
-			}
+            try
+            {
+                using (var clientHandler = new HttpClientHandler())
+                {
+                    string url = "https://localhost:7182/api/Bitacora/AddBitacora";
+                    string parameter = @"{'id_usuario': '" + id_usuario + "', 'name': '', 'lastname': '', 'description': '" + description + "', 'type': '" + type + "', 'creation_date': ''}";
+                    dynamic json = JObject.Parse(parameter);
+                    var httpContent = new StringContent(json.ToString(), Encoding.UTF8, "application/json");
+                    clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+                    HttpClient client = new HttpClient(clientHandler);
+                    client.DefaultRequestHeaders.Clear();
+                    var respose2 = client.PostAsync(url, httpContent).Result;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
 
 
-		}
+        }
 	}
 }

@@ -11,12 +11,12 @@ try
     Console.WriteLine("Hello, World!");
 
 
-    var privateKey = "0x69e8ad2982521b1d34a81fd06cd99360e91a297ca91322405e382c6c619eb741";
-    var chainid = 1337;
+    var privateKey = "fdc83fd884ae517f4772c462f794f254f2c499430e265ca724310ecd99b39f62";
+    var chainid = 5;
     var account = new Account(privateKey, chainid);
-    var web3 = new Web3(account, "http://127.0.0.1:7545");
+    var web3 = new Web3(account, "https://goerli.infura.io/v3/bdefe16b41da472991a8439fc5398b5d");
     Console.WriteLine(account.Address.ToString());
-
+   
     web3.Eth.TransactionManager.UseLegacyAsDefault = true;
     NFTPatientHealthChainDeployment healthChainDeployment = new NFTPatientHealthChainDeployment();
     healthChainDeployment.InitialOwner = account.Address;

@@ -19,8 +19,7 @@ namespace ApiSolicitudes.Controllers
             }
             catch (Exception ex)
             {
-                return NotFound();
-                throw ex;
+                return NotFound(ex);
             }
         }
 
@@ -35,8 +34,7 @@ namespace ApiSolicitudes.Controllers
             }
             catch (Exception ex)
             {
-                return NotFound();
-                throw ex;
+                return NotFound(ex);
             }
         }
 
@@ -51,8 +49,7 @@ namespace ApiSolicitudes.Controllers
             }
             catch (Exception ex)
             {
-                return NotFound();
-                throw ex;
+                return NotFound(ex);
             }
         }
 
@@ -66,8 +63,7 @@ namespace ApiSolicitudes.Controllers
             }
             catch (Exception ex)
             {
-                return NotFound();
-                throw ex;
+                return NotFound(ex);
             }
         }
 
@@ -82,8 +78,7 @@ namespace ApiSolicitudes.Controllers
             }
             catch (Exception ex)
             {
-                return NotFound();
-                throw ex;
+                return NotFound(ex);
             }
         }
     }

@@ -1,4 +1,5 @@
 ﻿using DAL.Manager;
+using DAL.Tools.Service;
 using Domain.DOMAIN;
 using System;
 using System.Collections.Generic;
@@ -29,32 +30,30 @@ namespace BLL.Service
 
         public IEnumerable<Medico> getAllmedicosEmpresas(string cuit)
         {
+            List<Medico> lista = new List<Medico>();
             try
             {
-                List<Medico> lista = new List<Medico>();
                 lista = (List<Medico>)MedicoManager.Current.GetMedicosEmpresa(cuit);
-                return lista;
             }
             catch (Exception ex)
             {
-
-                throw ex;
+                BitacoraService.Current.AddBitacora("ERROR", ex.Message.ToString(), "084757d9-cbf3-4098-9374-b9e6563dcfb3");
             }
+            return lista;
         }
 
         public Medico GetMedico(string username)
         {
+            Medico medico = new Medico();
             try
             {
-                Medico medico = new Medico();
                 medico = MedicoManager.Current.GetMedico(username);
-                return medico;
             }
             catch (Exception ex)
             {
-
-                throw ex;
+                BitacoraService.Current.AddBitacora("ERROR", ex.Message.ToString(), "084757d9-cbf3-4098-9374-b9e6563dcfb3");
             }
+            return medico;
         }
     }
 

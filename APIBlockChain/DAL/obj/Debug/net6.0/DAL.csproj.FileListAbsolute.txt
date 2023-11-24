@@ -10,3 +10,6 @@ R:\Agus\Facultad\TFI 5to\healthchain-back\APIBlockChain\DAL\obj\Debug\net6.0\DAL
 R:\Agus\Facultad\TFI 5to\healthchain-back\APIBlockChain\DAL\obj\Debug\net6.0\refint\DAL.dll
 R:\Agus\Facultad\TFI 5to\healthchain-back\APIBlockChain\DAL\obj\Debug\net6.0\DAL.pdb
 R:\Agus\Facultad\TFI 5to\healthchain-back\APIBlockChain\DAL\obj\Debug\net6.0\ref\DAL.dll
+R:\Agus\Facultad\TFI 5to\healthchain-back\APIBlockChain\DAL\bin\Debug\net6.0\DOMAIN.dll
+R:\Agus\Facultad\TFI 5to\healthchain-back\APIBlockChain\DAL\bin\Debug\net6.0\DOMAIN.pdb
+R:\Agus\Facultad\TFI 5to\healthchain-back\APIBlockChain\DAL\obj\Debug\net6.0\DAL.csproj.CopyComplete

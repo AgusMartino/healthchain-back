@@ -1,4 +1,5 @@
 ﻿using DAL.Tools;
+using DAL.Tools.Service;
 using DOMAIN.DomainDal;
 using Nethereum.HdWallet;
 using System;
@@ -40,13 +41,14 @@ namespace DAL.Managers
                 new SqlParameter("@id_billetera", Guid.Parse(walletCompany.id_wallet)),
                 new SqlParameter("@id_empresa", Guid.Parse(walletCompany.company_id)),
                 });
+                string detalle = "Se crea la relacion entre la billetera:" + walletCompany.wallet + "y el usuario:" + walletCompany.company_id;
+                BitacoraService.Current.AddBitacora("INFO", detalle, "084757d9-cbf3-4098-9374-b9e6563dcfb3");
             }
-			catch (Exception ex)
-			{
+            catch (Exception ex)
+            {
+                BitacoraService.Current.AddBitacora("ERROR", ex.Message.ToString(), "084757d9-cbf3-4098-9374-b9e6563dcfb3");
+            }
 
-				throw ex;
-			}
-            
         }
     }
 

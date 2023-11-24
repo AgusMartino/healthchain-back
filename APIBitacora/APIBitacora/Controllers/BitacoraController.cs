@@ -19,8 +19,7 @@ namespace APIBitacora.Controllers
             }
             catch (Exception ex)
             {
-                return NotFound();
-                throw ex;
+                return NotFound(ex);
             }
         }
 
@@ -34,8 +33,7 @@ namespace APIBitacora.Controllers
             }
             catch (Exception ex)
             {
-                return NotFound();
-                throw ex;
+                return NotFound(ex);
             }
         }
     }

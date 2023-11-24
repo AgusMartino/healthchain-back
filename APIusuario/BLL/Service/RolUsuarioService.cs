@@ -1,4 +1,5 @@
 ﻿using DAL.Manager;
+using DAL.Tools.Service;
 using Domain.DOMAIN;
 using System;
 using System.Collections.Generic;
@@ -39,24 +40,22 @@ namespace BLL.Service
             }
             catch (Exception ex)
             {
-
-                throw ex;
+                BitacoraService.Current.AddBitacora("ERROR", ex.Message.ToString(), "084757d9-cbf3-4098-9374-b9e6563dcfb3");
             }
         }
 
         public Rol GetRol(string id_usuario)
         {
+            Rol rol = new Rol();
             try
             {
-                Rol rol = new Rol();
                 rol = RolUsuarioManager.Current.GetRol(id_usuario);
-                return rol;
             }
             catch (Exception ex)
             {
-
-                throw ex;
+                BitacoraService.Current.AddBitacora("ERROR", ex.Message.ToString(), "084757d9-cbf3-4098-9374-b9e6563dcfb3");
             }
+            return rol;
         }
 
         public void UpdateRolUsuario(Usuario usuario)
@@ -68,8 +67,7 @@ namespace BLL.Service
             }
             catch (Exception ex)
             {
-
-                throw ex;
+                BitacoraService.Current.AddBitacora("ERROR", ex.Message.ToString(), "084757d9-cbf3-4098-9374-b9e6563dcfb3");
             }
         }
     }

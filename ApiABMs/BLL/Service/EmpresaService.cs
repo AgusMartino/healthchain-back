@@ -1,4 +1,5 @@
 ﻿using DAL.Manager;
+using DAL.Tools.Service;
 using Domain.DOMAIN;
 using Newtonsoft.Json.Linq;
 using System;
@@ -40,7 +41,7 @@ namespace BLL.Service
             }
             catch (Exception ex)
             {
-                throw;
+                BitacoraService.Current.AddBitacora("ERROR", ex.Message.ToString(), "084757d9-cbf3-4098-9374-b9e6563dcfb3");
             }
         }
         
@@ -52,43 +53,40 @@ namespace BLL.Service
             try
             {
                 empresa = EmpresaManager.Current.GetOne(criterios, valores);
-                return empresa;
             }
             catch (Exception ex)
             {
-
-                throw ex;
+                BitacoraService.Current.AddBitacora("ERROR", ex.Message.ToString(), "084757d9-cbf3-4098-9374-b9e6563dcfb3");
             }
+            return empresa;
         }
 
         public IEnumerable<Empresa> GetAll()
         {
+            List<Empresa> empresas = new List<Empresa>();
             try
             {
-                List<Empresa> empresas = new List<Empresa>();
-                empresas = (List<Empresa>)EmpresaManager.Current.GetAll();
-                return empresas;
+                empresas = (List<Empresa>)EmpresaManager.Current.GetAll(); 
             }
             catch (Exception ex)
             {
-
-                throw ex;
+                BitacoraService.Current.AddBitacora("ERROR", ex.Message.ToString(), "084757d9-cbf3-4098-9374-b9e6563dcfb3");
             }
+            return empresas;
         }
 
         public IEnumerable<Empresa> GetAllEmpresasAsociadasMedico(string userid)
         {
+            List<Empresa> empresas = new List<Empresa>();
             try
             {
-                List<Empresa> empresas = new List<Empresa>();
                 empresas = (List<Empresa>)EmpresaManager.Current.GetAllEmpresasAsociadasMedico(userid);
-                return empresas;
             }
             catch (Exception ex)
             {
-
-                throw ex;
+                BitacoraService.Current.AddBitacora("ERROR", ex.Message.ToString(), "084757d9-cbf3-4098-9374-b9e6563dcfb3");
             }
+            return empresas;
         }
     }
 

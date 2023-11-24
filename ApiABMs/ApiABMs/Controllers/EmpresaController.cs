@@ -19,8 +19,7 @@ namespace ApiABMs.Controllers
             }
             catch (Exception ex)
             {
-                return NotFound();
-                throw ex;
+                return NotFound(ex);
             }
         }
 
@@ -35,8 +34,7 @@ namespace ApiABMs.Controllers
             }
             catch (Exception ex)
             {
-                return NotFound();
-                throw ex;
+                return NotFound(ex);
             }
         }
 
@@ -51,8 +49,7 @@ namespace ApiABMs.Controllers
             }
             catch (Exception ex)
             {
-                return NotFound();
-                throw ex;
+                return NotFound(ex);
             }
         }
 
@@ -67,8 +64,7 @@ namespace ApiABMs.Controllers
             }
             catch (Exception ex)
             {
-                return NotFound();
-                throw ex;
+                return NotFound(ex);
             }
         }
     }

@@ -1,4 +1,5 @@
 ﻿using DAL.Manager;
+using DAL.Tools.Service;
 using Domain.DOMAIN;
 using System;
 using System.Collections.Generic;
@@ -29,34 +30,32 @@ namespace BLL.Service
 
         public tipo_solicitud GetOne(int id)
         {
+            tipo_solicitud solicitud = new tipo_solicitud();
             try
             {
-                tipo_solicitud solicitud = new tipo_solicitud();
                 string[] criterios = { "id" };
                 string[] valores = { id.ToString() };
-                solicitud = Tipo_solicitudManager.Current.GetOne(criterios, valores);
-                return solicitud;
+                solicitud = Tipo_solicitudManager.Current.GetOne(criterios, valores); 
             }
             catch (Exception ex)
             {
-
-                throw ex;
+                BitacoraService.Current.AddBitacora("ERROR", ex.Message.ToString(), "084757d9-cbf3-4098-9374-b9e6563dcfb3");
             }
+            return solicitud;
         }
 
         public IEnumerable<tipo_solicitud> GetAll()
         {
+            List<tipo_solicitud> solicituds = new List<tipo_solicitud>();
             try
             {
-                List<tipo_solicitud> solicituds = new List<tipo_solicitud>();
                 solicituds = (List<tipo_solicitud>)Tipo_solicitudManager.Current.GetAll();
-                return solicituds;
             }
             catch (Exception ex)
             {
-
-                throw ex;
+                BitacoraService.Current.AddBitacora("ERROR", ex.Message.ToString(), "084757d9-cbf3-4098-9374-b9e6563dcfb3");
             }
+            return solicituds;
         }
     }
 

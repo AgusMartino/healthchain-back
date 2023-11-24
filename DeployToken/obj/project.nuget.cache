@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "B643pSCur7DI8sjIexU78v7Mxwc4lAZ4EN7r0FbO00sSMFt4IBbkbhFrCommSywubsiGNx/gaDkuvhnRfs7aug==",
+  "dgSpecHash": "nF2HQf3BgKGWt9DOsae/s4zpXHl9N4ncYvQ0QKz6i5XhS2lLeZFmBkqVVCLTl12TBiPvhzyNI78RDAL5GbihDw==",
   "success": true,
   "projectFilePath": "R:\\Agus\\Facultad\\TFI 5to\\healthchain-back\\DeployToken\\DeployToken.csproj",
   "expectedPackageFiles": [
@@ -23,7 +23,7 @@
     "C:\\Users\\Agus\\.nuget\\packages\\nethereum.signer.eip712\\4.17.1\\nethereum.signer.eip712.4.17.1.nupkg.sha512",
     "C:\\Users\\Agus\\.nuget\\packages\\nethereum.util\\4.17.1\\nethereum.util.4.17.1.nupkg.sha512",
     "C:\\Users\\Agus\\.nuget\\packages\\nethereum.web3\\4.17.1\\nethereum.web3.4.17.1.nupkg.sha512",
-    "C:\\Users\\Agus\\.nuget\\packages\\newtonsoft.json\\11.0.2\\newtonsoft.json.11.0.2.nupkg.sha512",
+    "C:\\Users\\Agus\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
     "C:\\Users\\Agus\\.nuget\\packages\\portable.bouncycastle\\1.8.2\\portable.bouncycastle.1.8.2.nupkg.sha512"
   ],
   "logs": []

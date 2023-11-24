@@ -1,4 +1,5 @@
 ﻿using DAL.Managers;
+using DAL.Tools.Service;
 using DOMAIN.DomainDal;
 using Nethereum.Web3;
 using Nethereum.Web3.Accounts;
@@ -56,9 +57,8 @@ namespace BLL.Services
             }
 			catch (Exception ex)
 			{
-
-				throw ex;
-			}
+                BitacoraService.Current.AddBitacora("ERROR", ex.Message.ToString(), "084757d9-cbf3-4098-9374-b9e6563dcfb3");
+            }
         }
 
         public void CreateWalletCompany(string id_company)
@@ -85,8 +85,7 @@ namespace BLL.Services
             }
             catch (Exception ex)
             {
-
-                throw ex;
+                BitacoraService.Current.AddBitacora("ERROR", ex.Message.ToString(), "084757d9-cbf3-4098-9374-b9e6563dcfb3");
             }
         }
     }

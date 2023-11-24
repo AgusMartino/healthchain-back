@@ -1,0 +1,12 @@
+R:\Agus\Facultad\TFI 5to\healthchain-back\APIBlockChain\DOMAIN\bin\Debug\net6.0\DOMAIN.deps.json
+R:\Agus\Facultad\TFI 5to\healthchain-back\APIBlockChain\DOMAIN\bin\Debug\net6.0\DOMAIN.dll
+R:\Agus\Facultad\TFI 5to\healthchain-back\APIBlockChain\DOMAIN\bin\Debug\net6.0\DOMAIN.pdb
+R:\Agus\Facultad\TFI 5to\healthchain-back\APIBlockChain\DOMAIN\obj\Debug\net6.0\DOMAIN.csproj.AssemblyReference.cache
+R:\Agus\Facultad\TFI 5to\healthchain-back\APIBlockChain\DOMAIN\obj\Debug\net6.0\DOMAIN.GeneratedMSBuildEditorConfig.editorconfig
+R:\Agus\Facultad\TFI 5to\healthchain-back\APIBlockChain\DOMAIN\obj\Debug\net6.0\DOMAIN.AssemblyInfoInputs.cache
+R:\Agus\Facultad\TFI 5to\healthchain-back\APIBlockChain\DOMAIN\obj\Debug\net6.0\DOMAIN.AssemblyInfo.cs
+R:\Agus\Facultad\TFI 5to\healthchain-back\APIBlockChain\DOMAIN\obj\Debug\net6.0\DOMAIN.csproj.CoreCompileInputs.cache
+R:\Agus\Facultad\TFI 5to\healthchain-back\APIBlockChain\DOMAIN\obj\Debug\net6.0\DOMAIN.dll
+R:\Agus\Facultad\TFI 5to\healthchain-back\APIBlockChain\DOMAIN\obj\Debug\net6.0\refint\DOMAIN.dll
+R:\Agus\Facultad\TFI 5to\healthchain-back\APIBlockChain\DOMAIN\obj\Debug\net6.0\DOMAIN.pdb
+R:\Agus\Facultad\TFI 5to\healthchain-back\APIBlockChain\DOMAIN\obj\Debug\net6.0\ref\DOMAIN.dll

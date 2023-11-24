@@ -20,8 +20,7 @@ namespace APIusuario.Controllers
             }
             catch (Exception ex)
             {
-                return NotFound();
-                throw ex;
+                return NotFound(ex);
             }
         }
 
@@ -35,8 +34,7 @@ namespace APIusuario.Controllers
             }
             catch (Exception ex)
             {
-                return NotFound();
-                throw ex;
+                return NotFound(ex);
             }
         }
 
@@ -50,8 +48,7 @@ namespace APIusuario.Controllers
             }
             catch (Exception ex)
             {
-                return NotFound();
-                throw ex;
+                return NotFound(ex);
             }
         }
 
@@ -65,8 +62,7 @@ namespace APIusuario.Controllers
             }
             catch (Exception ex)
             {
-                return NotFound();
-                throw ex;
+                return NotFound(ex);
             }
         }
 
@@ -80,8 +76,7 @@ namespace APIusuario.Controllers
             }
             catch (Exception ex)
             {
-                return NotFound();
-                throw ex;
+                return NotFound(ex);
             }
         }
 
@@ -95,8 +90,7 @@ namespace APIusuario.Controllers
             }
             catch (Exception ex)
             {
-                return NotFound();
-                throw ex;
+                return NotFound(ex);
             }
         }
 

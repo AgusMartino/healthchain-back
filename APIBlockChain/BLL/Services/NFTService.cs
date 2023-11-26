@@ -49,26 +49,6 @@ namespace BLL.Services
                 WalletCompany walletCompany = BilleteraManager.Current.GetWalletCompany(nftRequest.id_user);
                 nft.billetera = walletCompany.wallet;
                 var TrxTransaccion = NFTManager.Current.AddNFTBlockchainAsync(nft, nftRequest.id_user).ToString();
-                nft.TrxTransaccion = TrxTransaccion;
-                nft.state_transaccion = TransaccionManager.Current.EstadoTransaccionAsync(nft.TrxTransaccion).ToString();
-                Transaccion transaccion = new Transaccion
-                {
-                    id_etherscan = nft.TrxTransaccion,
-                    TokenIdNFT = nft.TokenNFTid,
-                    usuario = GetNombreUser(nftRequest.id_user),
-                    billetera_origen = walletCompany.wallet,
-                    billetera_destino = null
-                };
-                if(nft.state_transaccion == "Success")
-                {
-                    //se registra en la base
-                    NFTManager.Current.AddNFTDal(nft);
-                    TransaccionManager.Current.AddTransaccionDal(transaccion);
-                }
-                if(nft.state_transaccion == "Failure")
-                {
-                    TransaccionManager.Current.AddTransaccionDal(transaccion);
-                }
             }
             catch (Exception ex)
             {
@@ -97,25 +77,7 @@ namespace BLL.Services
                 string id_usuario_medico = GetIDUser(nftRequest.id_user_Transfer);
                 WalletUser walletUser = BilleteraManager.Current.GetWalletUser(id_usuario_medico);
                 var TrxTransaccion = NFTManager.Current.TransferNFTBlockchain(nft, nftRequest.id_user, walletUser.wallet).ToString();
-                nft.TrxTransaccion = TrxTransaccion;
-                nft.state_transaccion = TransaccionManager.Current.EstadoTransaccionAsync(nft.TrxTransaccion).ToString();
-                Transaccion transaccion = new Transaccion
-                {
-                    id_etherscan = nft.TrxTransaccion,
-                    TokenIdNFT = nft.TokenNFTid,
-                    usuario = GetNombreUser(nftRequest.id_user),
-                    billetera_origen = walletCompany.wallet,
-                    billetera_destino = walletUser.wallet
-                };
-                if (nft.state_transaccion == "Success")
-                {
-                    NFTManager.Current.TranferNFT(nft, walletUser.wallet);
-                    TransaccionManager.Current.AddTransaccionDal(transaccion);
-                }
-                if (nft.state_transaccion == "Failure")
-                {
-                    TransaccionManager.Current.AddTransaccionDal(transaccion);
-                }
+                
 
             }
             catch (Exception ex)
@@ -138,31 +100,14 @@ namespace BLL.Services
                     Cobertura = nftRequest.Cobertura,
                     Consulta = nftRequest.Consulta,
                     Patologia = nftRequest.Patologia,
-                    Estado = nftRequest.Estado
+                    Estado = nftRequest.Estado,
+                    precio = nftRequest.precio
                 };
                 WalletUser WalletUser = BilleteraManager.Current.GetWalletUser(nftRequest.id_user);
                 nft.billetera = WalletUser.wallet;
                 WalletCompany WalletCompany = BilleteraManager.Current.GetWalletCompany(nftRequest.id_user_Transfer);
-                var TrxTransaccion = NFTManager.Current.TranferNFTWithETHBlockChain(nft, nftRequest.id_user, WalletCompany.wallet).ToString();
-                nft.TrxTransaccion = TrxTransaccion;
-                nft.state_transaccion = TransaccionManager.Current.EstadoTransaccionAsync(nft.TrxTransaccion).ToString();
-                Transaccion transaccion = new Transaccion
-                {
-                    id_etherscan = nft.TrxTransaccion,
-                    TokenIdNFT = nft.TokenNFTid,
-                    usuario = GetNombreUser(nftRequest.id_user_Transfer),
-                    billetera_origen = WalletUser.wallet,
-                    billetera_destino = WalletCompany.wallet
-                };
-                if (nft.state_transaccion == "Success")
-                {
-                    NFTManager.Current.TranferNFTWithETH(nft, WalletCompany.wallet);
-                    TransaccionManager.Current.AddTransaccionDal(transaccion);
-                }
-                if (nft.state_transaccion == "Failure")
-                {
-                    TransaccionManager.Current.AddTransaccionDal(transaccion);
-                }
+                var TrxTransaccion = NFTManager.Current.TranferNFTWithETHBlockChain(nft, nftRequest.id_user, WalletCompany.wallet, nftRequest.id_user_Transfer).ToString();
+                
             }
             catch (Exception ex)
             {
@@ -198,12 +143,13 @@ namespace BLL.Services
             return request;
         }
 
-        public IEnumerable<NftRequest> GetNFTMarketplace(string cuit_empresa)
+        public IEnumerable<NftRequest> GetNFTMarketplace(string id_user)
         {
             List<NftRequest> request = new List<NftRequest>();
             try
             {
-                request = (List<NftRequest>)NFTManager.Current.GetNFTList();
+                string cuit = GetCuitUser(id_user);
+                request = (List<NftRequest>)NFTManager.Current.GetNFTMarketplace(cuit);
             }
             catch (Exception ex)
             {
@@ -316,6 +262,25 @@ namespace BLL.Services
             }
             return id;
         }
+
+        private string GetCuitUser(string usuario)
+        {
+            string cuit_empresa = "";
+            using (var clientHandler = new HttpClientHandler())
+            {
+                string url = "https://localhost:7151/api/User/GetUser/" + usuario;
+                clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+                HttpClient client = new HttpClient(clientHandler);
+                client.DefaultRequestHeaders.Clear();
+                var response = client.GetAsync(url).Result;
+                var res = response.Content.ReadAsStringAsync().Result;
+                dynamic r = JObject.Parse(res);
+                cuit_empresa = Convert.ToString(r["cuit_empresa"]);
+            }
+            return cuit_empresa;
+        }
+
+        
     }
 
 }

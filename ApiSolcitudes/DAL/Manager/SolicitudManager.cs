@@ -78,7 +78,7 @@ namespace DAL.Manager
                         solicitud = SolicitudAdapter.Current.adapt(values);
                     }
                 }
-                string descripcion = "Se obtuvo la solicitud con los criterios:" + where;
+                string descripcion = "Se obtuvo la solicitud con los criterios:" + criterios[0].ToString() + "con el valor de: " + valores[0].ToString() + " y " + criterios[0].ToString() + "con el valor de: " + valores[0].ToString();
                 BitacoraService.Current.AddBitacora("INFO", descripcion, "084757d9-cbf3-4098-9374-b9e6563dcfb3");
             }
             catch (Exception ex)
@@ -189,14 +189,13 @@ namespace DAL.Manager
         {
             try
             {
-                SqlHelper.ExecuteNonQuery(UpdateStatement, System.Data.CommandType.Text, new SqlParameter[]
+                string statement = "UPDATE [dbo].[solicitudes] SET Estado = @Estado, fecha_modificacion = @fecha_modificacion WHERE cuit_empresa = @cuit_empresa and id_usuario = @id_usuario";
+                SqlHelper.ExecuteNonQuery(statement, System.Data.CommandType.Text, new SqlParameter[]
                 {
                     new SqlParameter("@cuit_empresa", entity.cuit_empresa),
                     new SqlParameter("@id_usuario", Guid.Parse(entity.id_usuario)),
-                    new SqlParameter("@id_tipo_solicitud", entity.tipo_Solicitud.id),
-                    new SqlParameter("@Descripcion", entity.Descripcion),
                     new SqlParameter("@Estado", Convert.ToInt32(entity.estado)),
-                    new SqlParameter("@fecha_modificacion", entity.fecha_modificacion)
+                    new SqlParameter("@fecha_modificacion", DateTime.Now)
                 });
 
                 string descripcion = "Se actualizo la informacion de la solicitud con id:" + entity.id_solicitud;

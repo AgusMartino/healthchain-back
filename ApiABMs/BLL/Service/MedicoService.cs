@@ -55,6 +55,18 @@ namespace BLL.Service
             }
             return medico;
         }
+
+        public void RegisterEspecialidad(Medico medico)
+        {
+            try
+            {
+                MedicoEspecialidadManager.Current.AddEspecialidad(medico.usuario, medico.especialidad);
+            }
+            catch (Exception ex)
+            {
+                BitacoraService.Current.AddBitacora("ERROR", ex.Message.ToString(), "084757d9-cbf3-4098-9374-b9e6563dcfb3");
+            }
+        }
     }
 
 }

@@ -38,13 +38,13 @@ namespace APIBlockChain.Controllers
             }
         }
 
-        [HttpGet("{cuit}", Name = "GetNFTMarketplace")]
-        public async Task<ActionResult<List<NftRequest>>> GetNFTMarketplace(string cuit)
+        [HttpGet("{id_user}", Name = "GetNFTMarketplace")]
+        public async Task<ActionResult<List<NftRequest>>> GetNFTMarketplace(string id_user)
         {
             try
             {
                 List<NftRequest> nft = new List<NftRequest>();
-                nft = (List<NftRequest>)NFTService.Current.GetNFTMarketplace(cuit);
+                nft = (List<NftRequest>)NFTService.Current.GetNFTMarketplace(id_user);
                 return nft;
             }
             catch (Exception ex)
@@ -117,6 +117,20 @@ namespace APIBlockChain.Controllers
             try
             {
                 NFTService.Current.TranferNFTWithETH(nftRequest);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex);
+            }
+        }
+
+        [HttpPost(Name = "modifyInformacionNFT")]
+        public async Task<ActionResult> modifyInformacionNFT(NftRequest nftRequest)
+        {
+            try
+            {
+                NFTService.Current.modifyInformacionNFT(nftRequest);
                 return Ok();
             }
             catch (Exception ex)

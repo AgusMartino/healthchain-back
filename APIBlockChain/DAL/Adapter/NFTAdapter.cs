@@ -43,6 +43,38 @@ namespace DAL.Adapter
             };
             return nft;
         }
+
+        public NftRequest adaptGetNFT(object[] values)
+        {
+            NftRequest nft = new NftRequest
+            {
+                id_user = values[(int)ColumnsGetNFT.id_user].ToString(),
+                TokenNFTid = values[(int)ColumnsGetNFT.TokenNFTid].ToString(),
+                Nombre_paciente = values[(int)ColumnsGetNFT.Nombre_paciente].ToString(),
+                Apellido_paciente = values[(int)ColumnsGetNFT.Apellido_paciente].ToString(),
+                Dni = values[(int)ColumnsGetNFT.Dni].ToString(),
+                Cobertura = values[(int)ColumnsGetNFT.Cobertura].ToString(),
+                Consulta = values[(int)ColumnsGetNFT.Consulta].ToString(),
+                Patologia = values[(int)ColumnsGetNFT.Patologia].ToString(),
+                Estado = values[(int)ColumnsGetNFT.estado].ToString(),
+                precio = values[(int)ColumnsGetNFT.precio].ToString()
+            };
+            return nft;
+        }
+        private enum ColumnsGetNFT
+        {
+            id_user,
+            TokenNFTid,
+            Nombre_paciente,
+            Apellido_paciente,
+            Dni,
+            Cobertura,
+            Consulta,
+            Patologia,
+            estado,
+            precio
+        }
+
         private enum Columns
         {
             TokenNFTid,

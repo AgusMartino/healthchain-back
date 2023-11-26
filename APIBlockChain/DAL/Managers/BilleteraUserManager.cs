@@ -34,7 +34,7 @@ namespace DAL.Managers
         {
             try
             {
-                string statement = "INSERT INTO [dbo].[BilleteraEmpresa] (id_billetera_usuario, id_billetera, id_usuario) VALUES (@id_billetera_usuario, @id_billetera, @id_usuario)";
+                string statement = "INSERT INTO [dbo].[BilleteraUsuario] (id_billetera_usuario, id_billetera, id_usuario) VALUES (@id_billetera_usuario, @id_billetera, @id_usuario)";
                 SqlHelper.ExecuteNonQuery(statement, System.Data.CommandType.Text, new SqlParameter[]
                 {
                     new SqlParameter("@id_billetera_usuario", Guid.NewGuid()),

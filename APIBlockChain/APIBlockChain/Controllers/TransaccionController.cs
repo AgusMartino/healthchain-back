@@ -91,7 +91,7 @@ namespace APIBlockChain.Controllers
             try
             {
                 List<Transaccion> transaccion = new List<Transaccion>();
-                transaccion = (List<Transaccion>)TransaccionService.Current.getTransaccionesFechasUser(fechasRequest.fechaInicio, fechasRequest.fechaFin, fechasRequest.user);
+                transaccion = (List<Transaccion>)TransaccionService.Current.getTransaccionesFechasCompany(fechasRequest.fechaInicio, fechasRequest.fechaFin, fechasRequest.user);
                 return transaccion;
             }
             catch (Exception ex)

@@ -69,42 +69,61 @@ namespace BLL.Service
             {
                 solicitud.fecha_modificacion = DateTime.Now;
                 SolicitudManager.Current.Update(solicitud);
+                if(solicitud.estado == "2")
+                {
+                    string id_empresa = GetIDEmpresa(solicitud.cuit_empresa);
+                    MedicoEmpresaManager.Current.RelationshipMedicoEmpresa(solicitud.id_usuario, id_empresa);
+                }
             }
             catch (Exception ex)
             {
-
-                throw ex;
+                BitacoraService.Current.AddBitacora("ERROR", ex.Message.ToString(), "084757d9-cbf3-4098-9374-b9e6563dcfb3");
             }
         }
 
         public IEnumerable<Solicitud> GetAll(int tipo, string cuit)
         {
+            List<Solicitud> solicituds = new List<Solicitud>();
             try
             {
-                List<Solicitud> solicituds = new List<Solicitud>();
                 solicituds = (List<Solicitud>)SolicitudManager.Current.GetAllSolicitudes(tipo, cuit);
-                return solicituds;
             }
             catch (Exception ex)
             {
-
-                throw ex;
+                BitacoraService.Current.AddBitacora("ERROR", ex.Message.ToString(), "084757d9-cbf3-4098-9374-b9e6563dcfb3");
             }
+            return solicituds;
         }
 
         public IEnumerable<Solicitud> GetAllSolicitudesUser(string id_usuario)
         {
+            List<Solicitud> solicituds = new List<Solicitud>();
             try
             {
-                List<Solicitud> solicituds = new List<Solicitud>();
                 solicituds = (List<Solicitud>)SolicitudManager.Current.GetAllSolicitudesUser(id_usuario);
-                return solicituds;
             }
             catch (Exception ex)
             {
-
-                throw ex;
+                BitacoraService.Current.AddBitacora("ERROR", ex.Message.ToString(), "084757d9-cbf3-4098-9374-b9e6563dcfb3");
             }
+            return solicituds;
+        }
+
+        public string GetIDEmpresa(string cuit)
+        {
+            string id = "";
+            using (var clientHandler = new HttpClientHandler())
+            {
+                string url = "https://localhost:7227/api/Empresa/GetOneEmpresa/" + cuit;
+                clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+                HttpClient client = new HttpClient(clientHandler);
+                client.DefaultRequestHeaders.Clear();
+                var response = client.GetAsync(url).Result;
+                var res = response.Content.ReadAsStringAsync().Result;
+                dynamic r = JObject.Parse(res);
+                id = Convert.ToString(r["id_empresa"]);
+            }
+            return id;
         }
     }
 

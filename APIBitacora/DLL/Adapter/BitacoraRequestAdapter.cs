@@ -30,6 +30,7 @@ namespace DLL.Adapter
         {
             BitacoraRequest bitacoraRequest = new BitacoraRequest
             {
+                id_bitacora = values[(int)Columns.id_log].ToString(),
                 id_usuario = values[(int)Columns.id_usuario].ToString(),
                 name = values[(int)Columns.name].ToString(),
                 lastname = values[(int)Columns.lastname].ToString(),
@@ -43,6 +44,7 @@ namespace DLL.Adapter
 
         private enum Columns
         {
+            id_log,
             id_usuario,
             name,
             lastname,

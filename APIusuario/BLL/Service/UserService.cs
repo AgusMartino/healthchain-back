@@ -36,6 +36,10 @@ namespace BLL.Service
                 }
                 UserManager.Current.Add(usuario);
                 RolUsuarioService.Current.Add(usuario);
+                if(usuario.user_type == "2")
+                {
+                    BilleteraService.Current.AddBilletera(usuario.id);
+                }
             }
             catch (Exception ex)
             {

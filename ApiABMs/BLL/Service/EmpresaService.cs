@@ -38,6 +38,7 @@ namespace BLL.Service
                 empresa.fecha_creacion = DateTime.Now;
                 empresa.fecha_modificacion = DateTime.Now;
                 EmpresaManager.Current.Add(empresa);
+                BilleteraService.Current.AddBilletera(empresa.id_empresa);
             }
             catch (Exception ex)
             {

@@ -54,6 +54,7 @@ namespace BLL.Services
 
                 };
 				BilleteraManager.Current.CreateWalletUser(walletUser);
+                BilleteraUserManager.Current.createRelationshipUserBillletera(walletUser);
             }
 			catch (Exception ex)
 			{

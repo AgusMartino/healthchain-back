@@ -9,11 +9,11 @@ namespace APIBlockChain.Controllers
     public class BilleteraController : Controller
     {
         [HttpGet("{id}", Name = "CreateWallet")]
-        public async Task<ActionResult> CreateWalletUser(string id_user)
+        public async Task<ActionResult> CreateWalletUser(string id)
         {
             try
             {
-                BilleteraService.Current.CreateWalletUser(id_user);
+                BilleteraService.Current.CreateWalletUser(id);
                 return Ok();
             }
             catch (Exception ex)
@@ -23,11 +23,11 @@ namespace APIBlockChain.Controllers
         }
 
         [HttpGet("{id}", Name = "CreateWalletCompany")]
-        public async Task<ActionResult> CreateWalletCompany(string id_company)
+        public async Task<ActionResult> CreateWalletCompany(string id)
         {
             try
             {
-                BilleteraService.Current.CreateWalletCompany(id_company);
+                BilleteraService.Current.CreateWalletCompany(id);
                 return Ok();
             }
             catch (Exception ex)

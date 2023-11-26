@@ -57,10 +57,11 @@ namespace DAL.Managers
 		{
 			try
 			{
+
 				string statement = "INSERT INTO [dbo].[transaccion] (id_trasaccion, id_etherscan, TokenIdNFT, usuario, billetera_origen, billetera_destino, fecha_transaccion) VALUES (@id_trasaccion, @id_etherscan, @TokenIdNFT, @usuario, @billetera_origen, @billetera_destino, @fecha_transaccion)";
                 SqlHelper.ExecuteNonQuery(statement, System.Data.CommandType.Text, new SqlParameter[]
                 {
-                    new SqlParameter("@id_trasaccion", Guid.NewGuid),
+                    new SqlParameter("@id_trasaccion", Guid.NewGuid()),
                     new SqlParameter("@id_etherscan", transaccion.id_etherscan),
                     new SqlParameter("@TokenIdNFT", int.Parse(transaccion.TokenIdNFT)),
                     new SqlParameter("@usuario", transaccion.usuario),
@@ -252,6 +253,7 @@ namespace DAL.Managers
             }
             return transaccions;
         }
+
     }
 
 }

@@ -6,12 +6,15 @@ using DOMAIN.DomainDal;
 using DOMAIN.DomainRequest;
 using Nethereum.Contracts.Standards.ERC20.TokenList;
 using Nethereum.Hex.HexTypes;
+using Nethereum.RPC.Eth.DTOs;
 using Nethereum.Web3;
 using Nethereum.Web3.Accounts;
+using Newtonsoft.Json.Linq;
 using Org.BouncyCastle.Asn1.Ocsp;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Globalization;
 using System.Linq;
 using System.Numerics;
 using System.Text;
@@ -63,6 +66,35 @@ namespace DAL.Managers
                                                            functionInput: new object[] { toAddress, tokenIdToMint });
 				string detalle = "Se realiza el minteo del token con id:" + nft.TokenNFTid + "del usuario:" + id_user;
                 BitacoraService.Current.AddBitacora("INFO", detalle, "084757d9-cbf3-4098-9374-b9e6563dcfb3");
+
+                nft.TrxTransaccion = trx;
+                TransactionReceipt _receipt = null;
+                while (_receipt == null)
+                {
+                    _receipt = await web3.Eth.Transactions.GetTransactionReceipt.SendRequestAsync(trx);
+                }
+                nft.state_transaccion = _receipt.Status.Value.ToString();
+                string detalleTransaccion = "Se consulto el estado de la transaccion:" + trx;
+                BitacoraService.Current.AddBitacora("INFO", detalleTransaccion, "084757d9-cbf3-4098-9374-b9e6563dcfb3");
+
+                Transaccion transaccion = new Transaccion
+                {
+                    id_etherscan = nft.TrxTransaccion,
+                    TokenIdNFT = nft.TokenNFTid,
+                    usuario = GetNombreUser(id_user),
+                    billetera_origen = nft.billetera,
+                    billetera_destino = ""
+                };
+                if (nft.state_transaccion == "1")
+                {
+                    //se registra en la base
+                    AddNFTDal(nft);
+                    TransaccionManager.Current.AddTransaccionDal(transaccion);
+                }
+                if (nft.state_transaccion == "0")
+                {
+                    TransaccionManager.Current.AddTransaccionDal(transaccion);
+                }
             }
 			catch (Exception ex)
 			{
@@ -75,15 +107,14 @@ namespace DAL.Managers
         {
 			try
 			{
-				string addNft = "INSERT INTO [dbo].[Nft] (id_nft, TokenNFTid, billetera, precio, estado, fecha_creacion) VALUES (@id_nft, @TokenNFTid, @billetera, @precio, @estado, @fecha_creacion)";
+				string addNft = "INSERT INTO [dbo].[Nft] (id_nft, TokenNFTid, billetera, estado, fecha_creacion) VALUES (@id_nft, @TokenNFTid, @billetera, @estado, @fecha_creacion)";
                 SqlHelper.ExecuteNonQuery(addNft, System.Data.CommandType.Text, new SqlParameter[]
                 {
                     new SqlParameter("@id_nft", Guid.Parse(nft.id_nft)),
                     new SqlParameter("@TokenNFTid", int.Parse(nft.TokenNFTid)),
                     new SqlParameter("@billetera", nft.billetera),
-                    new SqlParameter("@precio", nft.precio),
                     new SqlParameter("@estado", nft.Estado),
-                    new SqlParameter("@fecha_creacion", DateTime.Now),
+                    new SqlParameter("@fecha_creacion", DateTime.Now)
                 });
                 string descripcion_addNft = "Se el registro en la base de datos el tokenNFT con id:" + nft.id_nft;
                 BitacoraService.Current.AddBitacora("INFO", descripcion_addNft, "084757d9-cbf3-4098-9374-b9e6563dcfb3");
@@ -91,7 +122,7 @@ namespace DAL.Managers
                 string addInfoNft = "INSERT INTO [dbo].[informacion_nft] (id_informacion_paciente, TokenNFTid, Nombre_paciente, Apellido_paciente, Dni, Cobertura, Consulta, Patologia, fecha_creacion, fecha_modificacion) VALUES (@id_informacion_paciente, @TokenNFTid, @Nombre_paciente, @Apellido_paciente, @Dni, @Cobertura, @Consulta, @Patologia, @fecha_creacion, @fecha_modificacion)";
                 SqlHelper.ExecuteNonQuery(addInfoNft, System.Data.CommandType.Text, new SqlParameter[]
                 {
-                    new SqlParameter("@id_informacion_paciente", Guid.NewGuid),
+                    new SqlParameter("@id_informacion_paciente", Guid.NewGuid()),
                     new SqlParameter("@TokenNFTid", int.Parse(nft.TokenNFTid)),
                     new SqlParameter("@Nombre_paciente", nft.Nombre_paciente),
                     new SqlParameter("@Apellido_paciente", nft.Apellido_paciente),
@@ -134,6 +165,34 @@ namespace DAL.Managers
 
                 string detalle = "Se realiza la transferencia del token con id:" + nft.TokenNFTid + "del usuario:" + id_user + "al usuario con la billetera:" + billetera_destino;
                 BitacoraService.Current.AddBitacora("INFO", detalle, "084757d9-cbf3-4098-9374-b9e6563dcfb3");
+
+                //time out 3 min
+                nft.TrxTransaccion = trx;
+                TransactionReceipt _receipt = null;
+                while (_receipt == null)
+                {
+                    _receipt = await web3.Eth.Transactions.GetTransactionReceipt.SendRequestAsync(trx);
+                }
+                nft.state_transaccion = _receipt.Status.Value.ToString();
+                string detalleTransaccion = "Se consulto el estado de la transaccion:" + trx;
+                BitacoraService.Current.AddBitacora("INFO", detalleTransaccion, "084757d9-cbf3-4098-9374-b9e6563dcfb3");
+                Transaccion transaccion = new Transaccion
+                {
+                    id_etherscan = nft.TrxTransaccion,
+                    TokenIdNFT = nft.TokenNFTid,
+                    usuario = GetNombreUser(id_user),
+                    billetera_origen = walletCompany.wallet,
+                    billetera_destino = billetera_destino
+                };
+                if (nft.state_transaccion == "1")
+                {
+                    TranferNFT(nft, billetera_destino);
+                    TransaccionManager.Current.AddTransaccionDal(transaccion);
+                }
+                if (nft.state_transaccion == "0")
+                {
+                    TransaccionManager.Current.AddTransaccionDal(transaccion);
+                }
             }
             catch (Exception ex) 
             {
@@ -160,7 +219,7 @@ namespace DAL.Managers
                 BitacoraService.Current.AddBitacora("ERROR", ex.Message.ToString(), "084757d9-cbf3-4098-9374-b9e6563dcfb3");
             }
         }
-        public async Task<string> TranferNFTWithETHBlockChain(NFT nft, string id_user, string billetera_destino)
+        public async Task<string> TranferNFTWithETHBlockChain(NFT nft, string id_user, string billetera_destino, string id_user_Transfer)
         {
             string trx = "";
             try
@@ -175,7 +234,8 @@ namespace DAL.Managers
                 
 
                 BigInteger weiPerEth = BigInteger.Parse("1000000000000000000"); // 10^18 wei por 1 ETH
-                BigInteger weiAmount = BigInteger.Parse((int.Parse(nft.precio) * (decimal)weiPerEth).ToString());
+                decimal precioEnEth = Convert.ToDecimal(nft.precio, CultureInfo.InvariantCulture);
+                BigInteger weiAmount = BigInteger.Parse((Convert.ToUInt64(precioEnEth * (decimal)weiPerEth)).ToString());
                 var ethValue = new HexBigInteger(weiAmount);
 
                 string abi = @"function transferNFTWithETH(address to, uint256 tokenId) public payable returns (bytes32)";
@@ -190,6 +250,33 @@ namespace DAL.Managers
                 string detalle = "Se realiza la transferencia del token con id:" + nft.TokenNFTid + "al usuario con la billetera:" + billetera_destino + "Con un pago de:" + nft.precio + "ETH";
                 BitacoraService.Current.AddBitacora("INFO", detalle, "084757d9-cbf3-4098-9374-b9e6563dcfb3");
 
+                //time out
+                nft.TrxTransaccion = trx;
+                TransactionReceipt _receipt = null;
+                while (_receipt == null)
+                {
+                    _receipt = await web3.Eth.Transactions.GetTransactionReceipt.SendRequestAsync(trx);
+                }
+                nft.state_transaccion = _receipt.Status.Value.ToString();
+                string detalleTransaccion = "Se consulto el estado de la transaccion:" + trx;
+                BitacoraService.Current.AddBitacora("INFO", detalleTransaccion, "084757d9-cbf3-4098-9374-b9e6563dcfb3");
+                Transaccion transaccion = new Transaccion
+                {
+                    id_etherscan = nft.TrxTransaccion,
+                    TokenIdNFT = nft.TokenNFTid,
+                    usuario = GetNombreUser(id_user_Transfer),
+                    billetera_origen = nft.billetera,
+                    billetera_destino = billetera_destino
+                };
+                if (nft.state_transaccion == "1")
+                {
+                    TranferNFTWithETH(nft, billetera_destino);
+                    TransaccionManager.Current.AddTransaccionDal(transaccion);
+                }
+                if (nft.state_transaccion == "0")
+                {
+                    TransaccionManager.Current.AddTransaccionDal(transaccion);
+                }
             }
             catch (Exception ex)
             {
@@ -207,8 +294,8 @@ namespace DAL.Managers
                 {
                     new SqlParameter("@billetera", billetera_destino),
                     new SqlParameter("@TokenNFTid", int.Parse(nft.TokenNFTid)),
-                    new SqlParameter("@estado", "null"),
-                    new SqlParameter("@precio", 0),
+                    new SqlParameter("@estado", ""),
+                    new SqlParameter("@precio", ""),
                 });
                 string descripcion = "Se modifica el nft con tokenid:" + nft.TokenNFTid + "Y se envia a la billetera:" + billetera_destino;
                 BitacoraService.Current.AddBitacora("INFO", descripcion, "084757d9-cbf3-4098-9374-b9e6563dcfb3");
@@ -224,7 +311,7 @@ namespace DAL.Managers
 			NftRequest request = new NftRequest();
 			try
 			{
-				string statement = "select N.TokenNFTid, i.Nombre_paciente, i.Apellido_paciente, i.Dni, i.Cobertura, i.Consulta, i.Patologia, N.estado, N.precio from Nft as N join informacion_nft as i on i.TokenNFTid = N.TokenNFTid where N.TokenNFTid = @TokenNFTid";
+				string statement = "select bu.id_usuario, N.TokenNFTid, i.Nombre_paciente, i.Apellido_paciente, i.Dni, i.Cobertura, i.Consulta, i.Patologia, N.estado, N.precio from Nft as N join informacion_nft as i on i.TokenNFTid = N.TokenNFTid join Billetera as b on b.address = N.billetera join BilleteraUsuario as bu on bu.id_billetera = b.id_billetera where N.TokenNFTid = @TokenNFTid";
                 using (var dr = SqlHelper.ExecuteReader(statement, System.Data.CommandType.Text, new SqlParameter[]
                 {
                      new SqlParameter("@TokenNFTid", int.Parse(tokenid)),
@@ -234,7 +321,7 @@ namespace DAL.Managers
                     {
                         object[] vs = new object[dr.FieldCount];
                         dr.GetValues(vs);
-                        request = NFTAdapter.Current.adapt(vs);
+                        request = NFTAdapter.Current.adaptGetNFT(vs);
                     }
                 }
                 string detalle = "Se obtienen la informacion del nft con id:" + tokenid;
@@ -281,11 +368,11 @@ namespace DAL.Managers
             try
             {
                 NftRequest nft = new NftRequest();
-                string statement = "select N.TokenNFTid, i.Nombre_paciente, i.Apellido_paciente, i.Dni, i.Cobertura, i.Consulta, i.Patologia, N.estado, N.precio from Nft as N \r\njoin informacion_nft as i on i.TokenNFTid = N.TokenNFTid join Billetera as b on b.address = N.billetera join BilleteraUsuario as bu on bu.id_billetera = b.id_billetera join usuario as u on u.id_usuario = bu.id_usuario join medico_empresa as me on me.id_usuario_medico = u.id_usuario join Empresa as e on e.id_empresa = me.id_empresa where N.estado = @estado and e.cuit_empresa = @cuit_empresa";
+                string statement = "select N.TokenNFTid, i.Nombre_paciente, i.Apellido_paciente, i.Dni, i.Cobertura, i.Consulta, i.Patologia, N.estado, N.precio from Nft as N join informacion_nft as i on i.TokenNFTid = N.TokenNFTid join Billetera as b on b.address = N.billetera join BilleteraUsuario as bu on bu.id_billetera = b.id_billetera join medico_empresa as me on me.id_usuario_medico = bu.id_usuario join Empresa as e on e.id_empresa = me.id_empresa where N.estado = @estado and e.cuit_empresa = @cuit_empresa";
                 using (var dr = SqlHelper.ExecuteReader(statement, System.Data.CommandType.Text, new SqlParameter[]
                 {
                      new SqlParameter("@estado", "market"),
-                     new SqlParameter("@cuit_empresa", int.Parse(cuitEmpresa)),
+                     new SqlParameter("@cuit_empresa", cuitEmpresa),
                 }))
                 {
                     while (dr.Read())
@@ -361,14 +448,14 @@ namespace DAL.Managers
         {
             try
             {
-                string statement = "UPDATE [dbo].[informacion_nft] SET Nombre_paciente = @Nombre_paciente, Apellido_paciente = @Apellido_paciente, Dni = @Dni, Cobertura = @Cobertura, Consuta = @Consulta, Patologia = @Patologia, fecha_modificacion = @fecha_modificacion where TokenNFTid = @TokenNFTid";
+                string statement = "UPDATE [dbo].[informacion_nft] SET Nombre_paciente = @Nombre_paciente, Apellido_paciente = @Apellido_paciente, Dni = @Dni, Cobertura = @Cobertura, Consulta = @Consulta, Patologia = @Patologia, fecha_modificacion = @fecha_modificacion where TokenNFTid = @TokenNFTid";
                 SqlHelper.ExecuteNonQuery(statement, System.Data.CommandType.Text, new SqlParameter[]
                 {
                     new SqlParameter("@Nombre_paciente", nft.Nombre_paciente),
                     new SqlParameter("@Apellido_paciente", nft.Apellido_paciente),
                     new SqlParameter("@Dni", nft.Dni),
                     new SqlParameter("@Cobertura", nft.Cobertura),
-                    new SqlParameter("@Consuta", nft.Consulta),
+                    new SqlParameter("@Consulta", nft.Consulta),
                     new SqlParameter("@Patologia", nft.Patologia),
                     new SqlParameter("@fecha_modificacion", DateTime.Now),
                     new SqlParameter("@TokenNFTid", int.Parse(nft.TokenNFTid))
@@ -381,6 +468,23 @@ namespace DAL.Managers
             {
                 BitacoraService.Current.AddBitacora("ERROR", ex.Message.ToString(), "084757d9-cbf3-4098-9374-b9e6563dcfb3");
             }
+        }
+
+        private string GetNombreUser(string guid)
+        {
+            string user = "";
+            using (var clientHandler = new HttpClientHandler())
+            {
+                string url = "https://localhost:7151/api/User/GetUser/" + guid;
+                clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+                HttpClient client = new HttpClient(clientHandler);
+                client.DefaultRequestHeaders.Clear();
+                var response = client.GetAsync(url).Result;
+                var res = response.Content.ReadAsStringAsync().Result;
+                dynamic r = JObject.Parse(res);
+                user = Convert.ToString(r["name"]);
+            }
+            return user;
         }
     }
 }

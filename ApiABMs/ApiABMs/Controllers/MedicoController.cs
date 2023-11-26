@@ -38,5 +38,19 @@ namespace ApiABMs.Controllers
                 return NotFound(ex);
             }
         }
+
+        [HttpPost(Name = "AddEspecialidad")]
+        public async Task<ActionResult> AddEspecialidad(Medico medico)
+        {
+            try
+            {
+                MedicoService.Current.RegisterEspecialidad(medico);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex);
+            }
+        }
     }
 }

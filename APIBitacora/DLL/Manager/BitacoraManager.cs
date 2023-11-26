@@ -47,7 +47,7 @@ namespace DLL.Manager
 			try
 			{
 				List<BitacoraRequest> bitacoraRequests = new List<BitacoraRequest>();
-                string statement = "Select l.id_usuario, u.nombre, u.apellido, l.Descripcion, l.tipo_de_log, l.creation_date from dbo.Log as l join usuario as u on l.id_usuario = u.id_usuario where l.creation_date BETWEEN @fecha_incio and @fecha_final";
+                string statement = "Select l.id_log, l.id_usuario, u.nombre, u.apellido, l.Descripcion, l.tipo_de_log, l.creation_date from dbo.Log as l join usuario as u on l.id_usuario = u.id_usuario where l.creation_date BETWEEN @fecha_incio and @fecha_final";
 				BitacoraRequest bitacoraRequest = new BitacoraRequest();
 				using (var dr = SqlHelper.ExecuteReader(statement, System.Data.CommandType.Text, new SqlParameter[]
 				{

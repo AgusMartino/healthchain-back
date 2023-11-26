@@ -8,6 +8,7 @@ namespace DOMAIN.Domain
 {
     public class BitacoraRequest
     {
+        public string id_bitacora {  get; set; }
         public string id_usuario { get; set; }
         public string name { get; set; }
         public string lastname { get; set; }

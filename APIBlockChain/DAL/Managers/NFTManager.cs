@@ -264,7 +264,7 @@ namespace DAL.Managers
                 {
                     id_etherscan = nft.TrxTransaccion,
                     TokenIdNFT = nft.TokenNFTid,
-                    usuario = GetNombreUser(id_user_Transfer),
+                    usuario = GetNombreUser(id_user),
                     billetera_origen = nft.billetera,
                     billetera_destino = billetera_destino
                 };
@@ -311,7 +311,36 @@ namespace DAL.Managers
 			NftRequest request = new NftRequest();
 			try
 			{
-				string statement = "select bu.id_usuario, N.TokenNFTid, i.Nombre_paciente, i.Apellido_paciente, i.Dni, i.Cobertura, i.Consulta, i.Patologia, N.estado, N.precio from Nft as N join informacion_nft as i on i.TokenNFTid = N.TokenNFTid join Billetera as b on b.address = N.billetera join BilleteraUsuario as bu on bu.id_billetera = b.id_billetera where N.TokenNFTid = @TokenNFTid";
+				string statement = "select N.TokenNFTid, i.Nombre_paciente, i.Apellido_paciente, i.Dni, i.Cobertura, i.Consulta, i.Patologia, N.estado, N.precio from Nft as N join informacion_nft as i on i.TokenNFTid = N.TokenNFTid where N.TokenNFTid = @TokenNFTid";
+                using (var dr = SqlHelper.ExecuteReader(statement, System.Data.CommandType.Text, new SqlParameter[]
+                {
+                     new SqlParameter("@TokenNFTid", int.Parse(tokenid)),
+                }))
+                {
+                    while (dr.Read())
+                    {
+                        object[] vs = new object[dr.FieldCount];
+                        dr.GetValues(vs);
+                        request = NFTAdapter.Current.adapt(vs);
+                    }
+                }
+                string detalle = "Se obtienen la informacion del nft con id:" + tokenid;
+                BitacoraService.Current.AddBitacora("INFO", detalle, "084757d9-cbf3-4098-9374-b9e6563dcfb3");
+
+            }
+			catch (Exception ex)
+			{
+                BitacoraService.Current.AddBitacora("ERROR", ex.Message.ToString(), "084757d9-cbf3-4098-9374-b9e6563dcfb3");
+            }
+            return request;
+        }
+
+        public NftRequest GetNFTUsuario(string tokenid)
+        {
+            NftRequest request = new NftRequest();
+            try
+            {
+                string statement = "select bu.id_usuario, N.TokenNFTid, i.Nombre_paciente, i.Apellido_paciente, i.Dni, i.Cobertura, i.Consulta, i.Patologia, N.estado, N.precio from Nft as N join informacion_nft as i on i.TokenNFTid = N.TokenNFTid join Billetera as b on b.address = N.billetera join BilleteraUsuario as bu on bu.id_billetera = b.id_billetera where N.TokenNFTid = @TokenNFTid";
                 using (var dr = SqlHelper.ExecuteReader(statement, System.Data.CommandType.Text, new SqlParameter[]
                 {
                      new SqlParameter("@TokenNFTid", int.Parse(tokenid)),
@@ -328,8 +357,8 @@ namespace DAL.Managers
                 BitacoraService.Current.AddBitacora("INFO", detalle, "084757d9-cbf3-4098-9374-b9e6563dcfb3");
 
             }
-			catch (Exception ex)
-			{
+            catch (Exception ex)
+            {
                 BitacoraService.Current.AddBitacora("ERROR", ex.Message.ToString(), "084757d9-cbf3-4098-9374-b9e6563dcfb3");
             }
             return request;

@@ -38,6 +38,21 @@ namespace APIBlockChain.Controllers
             }
         }
 
+        [HttpGet("{tokenid}", Name = "GetNFTUsuario")]
+        public async Task<ActionResult<NftRequest>> GetNFTUsuario(string tokenid)
+        {
+            try
+            {
+                NftRequest nft = new NftRequest();
+                nft = NFTService.Current.GetNFTUsuario(tokenid);
+                return nft;
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex);
+            }
+        }
+
         [HttpGet("{id_user}", Name = "GetNFTMarketplace")]
         public async Task<ActionResult<List<NftRequest>>> GetNFTMarketplace(string id_user)
         {

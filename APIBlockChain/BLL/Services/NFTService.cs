@@ -129,6 +129,21 @@ namespace BLL.Services
             return request;
         }
 
+        public NftRequest GetNFTUsuario(string tokenid)
+        {
+            NftRequest request = new NftRequest();
+            try
+            {
+                request = NFTManager.Current.GetNFTUsuario(tokenid);
+            }
+            catch (Exception ex)
+            {
+                BitacoraService.Current.AddBitacora("ERROR", ex.Message.ToString(), "084757d9-cbf3-4098-9374-b9e6563dcfb3");
+            }
+            return request;
+        }
+
+
         public IEnumerable<NftRequest> GetNFTList()
         {
             List<NftRequest> request = new List<NftRequest>();

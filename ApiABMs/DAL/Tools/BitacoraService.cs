@@ -34,7 +34,7 @@ namespace DAL.Tools.Service
             {
                 using (var clientHandler = new HttpClientHandler())
                 {
-                    string url = "https://localhost:7182/api/Bitacora/AddBitacora";
+                    string url = "https://healthchain-api-bitacora-8ac3b5dd6f8a.herokuapp.com/api/Bitacora/AddBitacora";
                     string parameter = @"{'id_bitacora': '', 'id_usuario': '" + id_usuario + "', 'name': '', 'lastname': '', 'description': '" + description + "', 'type': '" + type + "', 'creation_date': ''}";
                     dynamic json = JObject.Parse(parameter);
                     var httpContent = new StringContent(json.ToString(), Encoding.UTF8, "application/json");

@@ -32,7 +32,7 @@ namespace BLL.Service
             {
                 using (var clientHandler = new HttpClientHandler())
                 {
-                    string url = "https://localhost:7107/api/Billetera/CreateWalletUser/" + user_id;
+                    string url = "https://healthchain-api-blockchain-02c3b0c377c2.herokuapp.com/api/Billetera/CreateWalletUser/" + user_id;
                     clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
                     HttpClient client = new HttpClient(clientHandler);
                     client.DefaultRequestHeaders.Clear();

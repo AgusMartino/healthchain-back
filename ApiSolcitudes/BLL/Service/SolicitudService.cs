@@ -114,7 +114,7 @@ namespace BLL.Service
             string id = "";
             using (var clientHandler = new HttpClientHandler())
             {
-                string url = "https://localhost:7227/api/Empresa/GetOneEmpresa/" + cuit;
+                string url = "https://healtchain-api-abms-4fd21ff66375.herokuapp.com/api/Empresa/GetOneEmpresa/" + cuit;
                 clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
                 HttpClient client = new HttpClient(clientHandler);
                 client.DefaultRequestHeaders.Clear();

@@ -68,7 +68,7 @@ namespace DAL.Manager.Adapter
             string user = "";
             using(var clientHandler = new HttpClientHandler())
             {
-                string url = "https://localhost:7151/api/User/GetUser/" + guid;
+                string url = "https://healthchain-api-usuarios-9e18a4d4a113.herokuapp.com/api/User/GetUser/" + guid;
                 clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
                 HttpClient client = new HttpClient(clientHandler);
                 client.DefaultRequestHeaders.Clear();
@@ -85,7 +85,7 @@ namespace DAL.Manager.Adapter
             string name = "";
             using (var clientHandler = new HttpClientHandler())
             {
-                string url = "https://localhost:7227/api/Empresa/GetOneEmpresa/" + cuit;
+                string url = "https://healtchain-api-abms-4fd21ff66375.herokuapp.com/api/Empresa/GetOneEmpresa/" + cuit;
                 clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
                 HttpClient client = new HttpClient(clientHandler);
                 client.DefaultRequestHeaders.Clear();
@@ -103,7 +103,7 @@ namespace DAL.Manager.Adapter
             if(id != "") { 
                 using(var clientHandler = new HttpClientHandler())
                 {
-                    string url = "https://localhost:7151/api/Rol/GetRol/" + id;
+                    string url = "https://healthchain-api-usuarios-9e18a4d4a113.herokuapp.com/api/Rol/GetRol/" + id;
                     clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
                     HttpClient client = new HttpClient(clientHandler);
                     client.DefaultRequestHeaders.Clear();

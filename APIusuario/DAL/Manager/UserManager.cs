@@ -175,7 +175,7 @@ namespace DAL.Manager
             try
             {
                 Usuario usuario = new Usuario();
-                string statement = "SELECT * FROM [dbo].[Usuario] WHERE cuit_empresa = @cuit_empresa and tipo_usuario = 1";
+                string statement = "SELECT * FROM [dbo].[Usuario] WHERE cuit_empresa = @cuit_empresa";
                 using (var dr = SqlHelper.ExecuteReader(statement, System.Data.CommandType.Text, new SqlParameter[] {
                                                        new SqlParameter("@cuit_empresa", cuit_empresa)}))
                 {

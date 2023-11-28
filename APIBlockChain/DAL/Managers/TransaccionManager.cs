@@ -191,18 +191,18 @@ namespace DAL.Managers
             return transaccions;
         }
 
-        public IEnumerable<Transaccion> getListTransaccionesFechaUser(string fechaInicio, string fechaFin, string user)
+        public IEnumerable<Transaccion> getListTransaccionesFechaUser(string fechaInicio, string fechaFin, string billetera, string user)
         {
             List<Transaccion> transaccions = new List<Transaccion>();
             try
             {
                 Transaccion transaccion = new Transaccion();
-                string statement = "Select id_etherscan, TokenIdNFT, usuario, billetera_origen, billetera_destino, fecha_transaccion From transaccion where fecha_transaccion BETWEEN @fecha_incio and @fecha_final and usuario = @usuario";
+                string statement = "Select id_etherscan, TokenIdNFT, usuario, billetera_origen, billetera_destino, fecha_transaccion From transaccion where fecha_transaccion BETWEEN @fecha_incio and @fecha_final and billetera_origen = @billetera_origen";
                 using (var dr = SqlHelper.ExecuteReader(statement, System.Data.CommandType.Text, new SqlParameter[]
                 {
                      new SqlParameter("@fecha_incio", DateTime.Parse(fechaInicio)),
                      new SqlParameter("@fecha_final", DateTime.Parse(fechaFin)),
-                     new SqlParameter("@usuario", user)
+                     new SqlParameter("@billetera_origen", billetera)
                 }))
                 {
                     while (dr.Read())

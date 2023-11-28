@@ -88,8 +88,10 @@ namespace BLL.Services
             List<Transaccion> transaccions = new List<Transaccion>();
             try
             {
-               
-                transaccions = (List<Transaccion>)TransaccionManager.Current.getListTransaccionesFechaUser(fechaInicio, fechaFin, user);
+                string id_user = GetIDUser(user);
+                WalletUser walletUser = new WalletUser();
+                walletUser = BilleteraManager.Current.GetWalletUser(id_user);
+                transaccions = (List<Transaccion>)TransaccionManager.Current.getListTransaccionesFechaUser(fechaInicio, fechaFin, walletUser.wallet, user);
             }
             catch (Exception ex)
             {
@@ -129,6 +131,23 @@ namespace BLL.Services
                 user = Convert.ToString(r["name"]);
             }
             return user;
+        }
+
+        private string GetIDUser(string user)
+        {
+            string guid = "";
+            using (var clientHandler = new HttpClientHandler())
+            {
+                string url = "https://healthchain-api-usuarios-9e18a4d4a113.herokuapp.com/api/User/ValidateUser/" + user;
+                clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+                HttpClient client = new HttpClient(clientHandler);
+                client.DefaultRequestHeaders.Clear();
+                var response = client.GetAsync(url).Result;
+                var res = response.Content.ReadAsStringAsync().Result;
+                dynamic r = JObject.Parse(res);
+                guid = Convert.ToString(r["id"]);
+            }
+            return guid;
         }
     }
 

@@ -228,12 +228,13 @@ namespace DAL.Managers
             try
             {
                 Transaccion transaccion = new Transaccion();
-                string statement = "Select id_etherscan, TokenIdNFT, usuario, billetera_origen, billetera_destino, fecha_transaccion From transaccion where fecha_transaccion BETWEEN @fecha_incio and @fecha_final and billetera_origen = @billetera_origen";
+                string statement = "Select id_etherscan, TokenIdNFT, usuario, billetera_origen, billetera_destino, fecha_transaccion From transaccion where fecha_transaccion BETWEEN @fecha_incio and @fecha_final and billetera_origen = @billetera_origen and billetera_destino = @billetera_destino";
                 using (var dr = SqlHelper.ExecuteReader(statement, System.Data.CommandType.Text, new SqlParameter[]
                 {
                      new SqlParameter("@fecha_incio", DateTime.Parse(fechaInicio)),
                      new SqlParameter("@fecha_final", DateTime.Parse(fechaFin)),
-                     new SqlParameter("@billetera_origen", billetera)
+                     new SqlParameter("@billetera_origen", billetera),
+                     new SqlParameter("@billetera_destino", billetera)
                 }))
                 {
                     while (dr.Read())
